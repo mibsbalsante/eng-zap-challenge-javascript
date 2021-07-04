@@ -1,0 +1,9 @@
+{
+  "name": "zap",
+  "version": "1.0.0",
+  "description": "Teste para o grupo OLX/Zap+",
+  "main": "index.js",
+  "repository": "git@github.com:mibsbalsante/zap.git",
+  "author": "Mibs Balsante <mibsbalsante@gmail.com>",
+  "license": "GNU GPLv3"
+}
