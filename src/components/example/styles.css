@@ -1,4 +1,4 @@
 .example {
     color: yellow;
-    background-color: red;
+    background-color: var(--color-primary);
 }

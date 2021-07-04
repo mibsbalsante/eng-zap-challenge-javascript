@@ -1,0 +1,15 @@
+{
+  "plugins": {
+    "postcss-preset-env": {
+      "autoprefixer": {},
+      "browsers": "last 2 versions",
+      "features": {
+        "nesting-rules": true,
+        "color-mod-function": { "unresolved": "warn" }
+      },
+      "importFrom": "./src/config/variables.css",
+      "preserve": false,
+      "stage": 2,
+    }
+  }
+}
