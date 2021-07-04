@@ -6,6 +6,11 @@
   "repository": "git@github.com:mibsbalsante/zap.git",
   "author": "Mibs Balsante <mibsbalsante@gmail.com>",
   "license": "GNU GPLv3",
+  "scripts": {
+    "dev": "webpack serve --hot --mode development",
+    "dev:open": "webpack serve --open --hot --mode development",
+    "build": "webpack --mode production"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
