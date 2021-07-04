@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Example from '@comp/example'
 
 const App = (
-    <p>React first build</p>
+    <Example />
 )
 
 ReactDOM.render(App, document.querySelector('#root'))

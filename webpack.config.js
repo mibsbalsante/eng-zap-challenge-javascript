@@ -58,5 +58,10 @@ module.exports = (env, arg) => {
                 filename: './index.html',
             }),
         ],
+        resolve: {
+            alias: {
+                '@comp': path.resolve(__dirname, 'src/components')
+            }
+        },
     }
 }
