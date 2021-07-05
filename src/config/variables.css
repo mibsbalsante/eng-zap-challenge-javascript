@@ -1,6 +1,6 @@
 :root {
   /* Main colors */
-  --color-primary: #f0f;
+  --color-primary: color-mod(#f0f, a(40%));
 
   /* Helper colors */
 
@@ -9,5 +9,4 @@
   /* Spacing */
 
   /* Transitions */
-
 }

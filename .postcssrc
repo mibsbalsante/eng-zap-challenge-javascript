@@ -1,15 +1,20 @@
 {
-  "plugins": {
-    "postcss-preset-env": {
-      "autoprefixer": {},
-      "browsers": "last 2 versions",
-      "features": {
-        "nesting-rules": true,
-        "color-mod-function": { "unresolved": "warn" }
-      },
-      "importFrom": "./src/config/variables.css",
-      "preserve": false,
-      "stage": 2,
-    }
-  }
+  "plugins": [
+    [
+      "postcss-preset-env",
+      {
+        "browsers": "last 2 versions",
+        "features": {
+          "color-mod-function": { "unresolved": "ignore" }
+        },
+        "importFrom": [
+          "./src/config/variables.css"
+        ],
+        "preserve": false,
+        "stage": 2
+      }
+    ],
+    "postcss-nested",
+    "stylelint"
+  ]
 }
