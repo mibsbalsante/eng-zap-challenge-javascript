@@ -8,7 +8,7 @@ import Pagination from '@comp/pagination'
 import styles from './styles.css'
 
 const Home = ({ location }) => (
-  <div className={styles.home}>
+  <div className={styles.pageHome}>
     <p>Homepage: {location.pathname}</p>
     <Filters />
     <Feed />
