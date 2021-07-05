@@ -1,14 +1,16 @@
 const path = require('path')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = (env, arg) => {
-  const devMode = arg.mode !== 'production'
+module.exports = (env, { mode }) => {
+  const devMode = mode !== 'production'
 
   return {
     devtool: devMode ? 'eval' : 'source-map',
     entry: path.resolve(__dirname, './src/index.js'),
+    mode,
     module: {
       rules: [
         {
@@ -32,7 +34,7 @@ module.exports = (env, arg) => {
           test: /\.css$/,
           include: /node_modules/,
           exclude: /src/,
-          use: ['css-loader', 'postcss-loader'],
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
         },
         {
           test: /\.html$/,
@@ -46,6 +48,9 @@ module.exports = (env, arg) => {
           use: { loader: 'babel-loader' },
         },
       ],
+    },
+    optimization: {
+      minimizer: [`...`, new CssMinimizerPlugin()],
     },
     output: {
       path: path.resolve(__dirname, './dist'),
