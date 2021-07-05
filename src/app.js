@@ -2,6 +2,12 @@ import 'sanitize.css'
 
 import React from 'react'
 
-const App = () => <div></div>
+import Navbar from '@comp/navbar'
+
+const App = () => (
+  <div>
+    <Navbar />
+  </div>
+)
 
 export default App
