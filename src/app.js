@@ -2,12 +2,6 @@ import 'sanitize.css'
 
 import React from 'react'
 
-import Example from '@comp/example'
-
-const App = () => (
-  <div>
-    <Example></Example>
-  </div>
-)
+const App = () => <div></div>
 
 export default App
