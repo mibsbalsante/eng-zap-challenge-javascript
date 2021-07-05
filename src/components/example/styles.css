@@ -1,0 +1,8 @@
+.example {
+  color: yellow;
+  background-color: var(--color-primary);
+
+  &--bold {
+    font-weight: 700;
+  }
+}
