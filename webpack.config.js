@@ -8,6 +8,9 @@ module.exports = (env, { mode }) => {
   const devMode = mode !== 'production'
 
   return {
+    devServer: {
+      historyApiFallback: true,
+    },
     devtool: devMode ? 'eval' : 'source-map',
     entry: path.resolve(__dirname, './src/index.js'),
     mode,
