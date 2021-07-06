@@ -1,5 +1,6 @@
 const path = require('path')
 
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -86,6 +87,7 @@ module.exports = (env, { mode }) => {
       filename: 'index__[contenthash].js',
     },
     plugins: [
+      new Dotenv(),
       new MiniCssExtractPlugin({
         filename: '[name]__[contenthash].css',
         chunkFilename: '[id]__[contenthash].css',
@@ -99,6 +101,7 @@ module.exports = (env, { mode }) => {
       alias: {
         '@comp': path.resolve(__dirname, 'src/components'),
         '@page': path.resolve(__dirname, 'src/pages'),
+        '@util': path.resolve(__dirname, 'src/utils'),
       },
     },
   }
