@@ -1,0 +1,16 @@
+.pageHome {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  &Filters {
+    grid-column: 1/2;
+  }
+
+  &Feed {
+    grid-column: 2/3;
+  }
+
+  &Pagination {
+    grid-column: 2/3;
+  }
+}

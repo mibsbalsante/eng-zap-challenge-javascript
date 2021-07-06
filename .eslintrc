@@ -13,6 +13,9 @@
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
+    },
+    "babelOptions": {
+      "configFile": "./.babelrc"
     }
   },
   "plugins": [
@@ -35,6 +38,10 @@
         ]
       }
     ],
+    "react/self-closing-comp": ["error", {
+      "component": true,
+      "html": false
+    }],
     "prettier/prettier": "error"
   },
   "settings": {

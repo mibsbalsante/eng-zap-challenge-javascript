@@ -1,14 +1,20 @@
 const path = require('path')
 
+const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = (env, arg) => {
-  const devMode = arg.mode !== 'production'
+module.exports = (env, { mode }) => {
+  const devMode = mode !== 'production'
 
   return {
+    devServer: {
+      historyApiFallback: true,
+    },
     devtool: devMode ? 'eval' : 'source-map',
     entry: path.resolve(__dirname, './src/index.js'),
+    mode,
     module: {
       rules: [
         {
@@ -32,7 +38,7 @@ module.exports = (env, arg) => {
           test: /\.css$/,
           include: /node_modules/,
           exclude: /src/,
-          use: ['css-loader', 'postcss-loader'],
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
         },
         {
           test: /\.html$/,
@@ -45,13 +51,43 @@ module.exports = (env, arg) => {
           exclude: /(node_modules)/,
           use: { loader: 'babel-loader' },
         },
+        {
+          test: /\.(jpg|png|gif|svg)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: 'img/',
+                publicPath: '/img/',
+              },
+            },
+          ],
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: 'fonts/',
+                publicPath: '/fonts/',
+              },
+            },
+          ],
+        },
       ],
+    },
+    optimization: {
+      minimizer: [`...`, new CssMinimizerPlugin()],
     },
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: 'index__[contenthash].js',
     },
     plugins: [
+      new Dotenv(),
       new MiniCssExtractPlugin({
         filename: '[name]__[contenthash].css',
         chunkFilename: '[id]__[contenthash].css',
@@ -64,6 +100,8 @@ module.exports = (env, arg) => {
     resolve: {
       alias: {
         '@comp': path.resolve(__dirname, 'src/components'),
+        '@page': path.resolve(__dirname, 'src/pages'),
+        '@util': path.resolve(__dirname, 'src/utils'),
       },
     },
   }
