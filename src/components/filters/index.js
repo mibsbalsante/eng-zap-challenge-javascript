@@ -1,12 +1,14 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import InputRange from '@comp/input-range'
 import Selection from '@comp/selection'
 
 import styles from './styles.css'
 
-const Filters = () => (
-  <form action='#' className={styles.filters}>
+const Filters = ({ className }) => (
+  <form action='#' className={classNames(styles.filters, className)}>
     <div>
       <div>
         <label htmlFor='purpose'>Finalidade</label>
@@ -35,5 +37,9 @@ const Filters = () => (
     </div>
   </form>
 )
+
+Filters.propTypes = {
+  className: PropTypes.string.isRequired,
+}
 
 export default Filters

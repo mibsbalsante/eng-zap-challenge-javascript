@@ -1,9 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import styles from './styles.css'
 
-const Pagination = () => (
-  <nav className={styles.pagination}>
+const Pagination = ({ className }) => (
+  <nav className={classNames(styles.pagination, className)}>
     <a href='#'>anterior</a>
     <a href='#'>1</a>
     <a href='#'>2</a>
@@ -11,5 +13,9 @@ const Pagination = () => (
     <a href='#'>proxima</a>
   </nav>
 )
+
+Pagination.propTypes = {
+  className: PropTypes.string.isRequired,
+}
 
 export default Pagination
