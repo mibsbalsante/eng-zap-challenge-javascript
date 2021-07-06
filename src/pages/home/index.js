@@ -18,10 +18,9 @@ const Home = ({ location }) => {
 
   return (
     <div className={styles.pageHome}>
-      <p>Homepage: {location.pathname}</p>
-      <Filters />
-      <Feed />
-      <Pagination />
+      <Filters className={styles.pageHomeFilters} />
+      <Feed className={styles.pageHomeFeed} />
+      <Pagination className={styles.pageHomePagination} />
     </div>
   )
 }
