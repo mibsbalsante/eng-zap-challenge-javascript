@@ -13,7 +13,6 @@ const Card = () => (
           <span>R$ 2000,00</span>
           <span>R$ 200,00</span>
         </p>
-        <h2>descr</h2>
         <div>
           <p>
             <span>25m²</span>
