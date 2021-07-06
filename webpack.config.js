@@ -50,6 +50,32 @@ module.exports = (env, { mode }) => {
           exclude: /(node_modules)/,
           use: { loader: 'babel-loader' },
         },
+        {
+          test: /\.(jpg|png|gif|svg)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: 'img/',
+                publicPath: '/img/',
+              },
+            },
+          ],
+        },
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: 'fonts/',
+                publicPath: '/fonts/',
+              },
+            },
+          ],
+        },
       ],
     },
     optimization: {
