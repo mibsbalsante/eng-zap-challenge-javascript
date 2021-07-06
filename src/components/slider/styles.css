@@ -1,0 +1,12 @@
+:root {
+  /* react-slick has white as default arrow color */
+  .slick-prev:before,
+  .slick-next:before {
+    color: black;
+  }
+}
+
+.slider {
+  padding: 0 50px;
+}
+
