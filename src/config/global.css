@@ -1,4 +1,12 @@
+@import "~@font/fontawesome-5.15.3/css/fontawesome.css";
+@import "~@font/fontawesome-5.15.3/css/solid.css";
+
 :root {
+  body,
+  input {
+    font-family: "Open Sans", Helvetica, sans-serif;
+  }
+
   img {
     object-fit: contain;
     object-position: center;
