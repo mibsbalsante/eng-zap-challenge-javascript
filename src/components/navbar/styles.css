@@ -39,13 +39,14 @@
   width: 100%;
   max-width: 180px;
   padding: 0 8px;
+  border-radius: var(--size-border-radius);
 
   img {
     max-height: 60%;
   }
 
   &Vivareal {
-    background-color: var(--color-darker);
+    background-color: var(--color-shadow);
   }
 
   &Zap {

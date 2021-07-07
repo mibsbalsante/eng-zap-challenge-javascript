@@ -2,22 +2,27 @@
   /* Main colors */
   --color-vivareal: #1190cd;
   --color-zap: #008295;
-  --color-white: #f0f8fc;
   --color-primary: #4fbfa5;
   --color-secondary: #0a5a80;
   --color-navbar: var(--color-vivareal);
+  --color-text: #1e272e;
 
   /* Helper colors */
-  --color-darker: rgba(0, 0, 0, 0.12);
+  --color-shadow: rgba(0, 0, 0, 0.12);
+  --color-white: #fefefe;
+  --color-transparent: rgba(255, 255, 255, 0);
 
   /* Font sizes */
 
   /* Sizes */
   --size-navbar: 64px;
   --size-container: 1248px;
+  --size-border-radius: 100px;
 
   /* Spacing */
   --space-container: 24px;
 
   /* Transitions */
+  --transition-partial: 0.3s ease-in-out;
+  --transition-primary: all var(--transition-partial);
 }

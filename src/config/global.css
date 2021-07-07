@@ -5,6 +5,11 @@
   body,
   input {
     font-family: "Open Sans", Helvetica, sans-serif;
+    font-size: 16px;
+  }
+
+  button {
+    cursor: pointer;
   }
 
   img {
