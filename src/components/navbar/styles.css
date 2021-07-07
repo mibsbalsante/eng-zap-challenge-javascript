@@ -1,4 +1,65 @@
 .navbar {
+  background-color: var(--color-navbar);
+}
+
+.container {
+  max-width: var(--size-container);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  min-height: var(--size-navbar);
+  padding: 0 var(--space-container);
+}
+
+.navigation {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  margin: 0 auto 0 24px;
+  padding-left: 25px;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 36px;
+    width: 1px;
+    background-color: var(--color-white);
+  }
+}
+
+.link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 180px;
+  padding: 0 8px;
+
+  img {
+    max-height: 60%;
+  }
+
+  &Vivareal {
+    background-color: var(--color-darker);
+  }
+
+  &Zap {
+    background-color: var(--color-white);
+  }
+
+  & + & {
+    margin-left: 16px;
+  }
+}
+
+.linkHome {
+  img {
+    max-width: 180px;
+    margin-top: 6px;
+  }
 }
