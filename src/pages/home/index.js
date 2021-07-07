@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Feed from '@comp/feed'
@@ -9,16 +9,24 @@ import request from '@util/request'
 import styles from './styles.css'
 
 const Home = ({ location }) => {
-  const getUsers = useCallback(async () => {
-    const users = await request()
-    console.info('>>users', users)
+  const [company, setCompany] = useState(null)
+
+  const getApartments = useCallback(async () => {
+    const apartments = await request()
+    console.info('>>apartments', apartments)
   }, [])
 
-  useEffect(getUsers, [])
+  useEffect(getApartments, [])
+
+  useEffect(() => {
+    if (location.pathname !== '/') setCompany(location.pathname.slice(1))
+    else setCompany(null)
+  }, [location.pathname])
 
   return (
     <div className={styles.pageHome}>
       <Filters className={styles.pageHomeFilters} />
+      {company && <p>Mostrando apenas imóveis de {company}</p>}
       <Feed className={styles.pageHomeFeed} />
       <Pagination className={styles.pageHomePagination} />
     </div>
