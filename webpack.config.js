@@ -99,7 +99,9 @@ module.exports = (env, { mode }) => {
     ],
     resolve: {
       alias: {
+        '@config': path.resolve(__dirname, 'src/config'),
         '@comp': path.resolve(__dirname, 'src/components'),
+        '@img': path.resolve(__dirname, 'src/assets/img'),
         '@page': path.resolve(__dirname, 'src/pages'),
         '@util': path.resolve(__dirname, 'src/utils'),
       },

@@ -1,12 +1,23 @@
 :root {
   /* Main colors */
-  --color-primary: color-mod(#f0f, a(40%));
+  --color-vivareal: #1190cd;
+  --color-zap: #008295;
+  --color-white: #f0f8fc;
+  --color-primary: #4fbfa5;
+  --color-secondary: #0a5a80;
+  --color-navbar: var(--color-vivareal);
 
   /* Helper colors */
+  --color-darker: rgba(0, 0, 0, 0.12);
 
   /* Font sizes */
 
+  /* Sizes */
+  --size-navbar: 64px;
+  --size-container: 1248px;
+
   /* Spacing */
+  --space-container: 24px;
 
   /* Transitions */
 }
