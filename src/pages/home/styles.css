@@ -1,6 +1,12 @@
 .pageHome {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 280px 1fr;
+  grid-column-gap: var(--space-container);
+
+  @media (--media-sm) {
+    grid-template-columns: 1fr;
+  }
 
   &Filters {
     grid-column: 1/2;

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 
+import Container from '@comp/container'
 import Feed from '@comp/feed'
 import Filters from '@comp/filters'
 import Pagination from '@comp/pagination'
@@ -43,12 +44,14 @@ const Home = ({ location }) => {
   }, [location.pathname])
 
   return (
-    <div className={styles.pageHome}>
-      <Filters className={styles.pageHomeFilters} />
-      {company && <p>Mostrando apenas imóveis de {company}</p>}
-      <Feed className={styles.pageHomeFeed} />
-      <Pagination className={styles.pageHomePagination} />
-    </div>
+    <Container>
+      <div className={styles.pageHome}>
+        <Filters className={styles.pageHomeFilters} />
+        {company && <p>Mostrando apenas imóveis de {company}</p>}
+        <Feed className={styles.pageHomeFeed} />
+        <Pagination className={styles.pageHomePagination} />
+      </div>
+    </Container>
   )
 }
 
