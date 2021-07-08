@@ -2,7 +2,6 @@ import React from 'react'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 
-import Search from '@comp/search'
 import logoGrupo from '@img/grupozap.png'
 import logoVivaReal from '@img/vivareal.png'
 import logoZap from '@img/zap.png'
@@ -35,7 +34,6 @@ const Navbar = () => (
           <img src={logoZap} alt='' />
         </Link>
       </nav>
-      <Search />
     </div>
   </header>
 )
