@@ -1,0 +1,34 @@
+.selection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(38px, 1fr));
+  grid-column-gap: 8px;
+}
+
+.option {
+  appearance: none;
+  white-space: nowrap;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-grey);
+  background-color: var(--color-white);
+  color: var(--color-grey);
+  font-size: var(--fontsize-sm);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 6px;
+  font-weight: 600;
+  border-radius: var(--size-border-radius);
+  transition: border-color var(--transition-partial), color var(--transition-partial);
+
+  &:hover,
+  &:focus {
+    border-color: color-mod(var(--color-zap), a(80%));
+    color: color-mod(var(--color-zap), a(80%));
+  }
+
+  &.current {
+    border-color: var(--color-zap);
+    color: var(--color-zap);
+  }
+}
