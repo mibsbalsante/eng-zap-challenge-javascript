@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { useHistory, useLocation } from 'react-router-dom'
 
+import helperStyles from '@config/helper-classes.css'
+
 import styles from './styles.css'
 
 const Selection = ({ field, options, textComplement }) => {
@@ -25,7 +27,7 @@ const Selection = ({ field, options, textComplement }) => {
       {currentOptions.map(option => (
         <button
           key={option.value}
-          className={classNames(styles.option, {
+          className={classNames(helperStyles.formControl, styles.option, {
             [styles.current]: current && current.value === option.value,
           })}
           onClick={() => {
