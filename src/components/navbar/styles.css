@@ -1,5 +1,6 @@
 .navbar {
   background-color: var(--color-navbar);
+  box-shadow: var(--boxshadow);
 }
 
 .navigation {

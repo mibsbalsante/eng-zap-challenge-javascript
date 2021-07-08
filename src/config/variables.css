@@ -38,4 +38,7 @@
   /* Transitions */
   --transition-partial: 0.3s ease-in-out;
   --transition-primary: all var(--transition-partial);
+
+  /* Misc */
+  --boxshadow: 0 1px 4px -1px color-mod(var(--color-grey), a(60%));
 }
