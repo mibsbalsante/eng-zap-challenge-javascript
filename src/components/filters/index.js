@@ -9,7 +9,7 @@ import styles from './styles.css'
 
 const Filters = ({ className }) => (
   <aside className={classNames(styles.filters, className)}>
-    <div>
+    <div className={styles.mainFilters}>
       <div>
         <label>Finalidade</label>
         <Selection
@@ -30,17 +30,19 @@ const Filters = ({ className }) => (
         <InputRange format='decimal' />
       </div>
     </div>
-    <div>
-      <label>Vagas de garagem</label>
-      <Selection field='parking' options={[1, 2, 3, 4]} textComplement='+' />
-    </div>
-    <div>
-      <label>Banheiros</label>
-      <Selection field='bathrooms' options={[1, 2, 3, 4]} textComplement='+' />
-    </div>
-    <div>
-      <label htmlFor='price'>Área(M²)</label>
-      <InputRange format='int' />
+    <div className={styles.moreFilters}>
+      <div>
+        <label>Vagas de garagem</label>
+        <Selection field='parking' options={[1, 2, 3, 4]} textComplement='+' />
+      </div>
+      <div>
+        <label>Banheiros</label>
+        <Selection field='bathrooms' options={[1, 2, 3, 4]} textComplement='+' />
+      </div>
+      <div>
+        <label htmlFor='price'>Área(M²)</label>
+        <InputRange format='int' />
+      </div>
     </div>
   </aside>
 )
