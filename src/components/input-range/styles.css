@@ -1,0 +1,35 @@
+.range {
+  padding: 4px 0 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 16px;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 6px 16px;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &.money {
+    padding: 6px 6px 6px 24px;
+  }
+}
+
+.currency {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--fontsize-xs);
+  font-weight: 600;
+  width: 24px;
+  padding-right: 2px;
+  text-align: right;
+}

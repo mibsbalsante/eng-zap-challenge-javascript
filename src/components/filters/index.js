@@ -28,7 +28,7 @@ const Filters = ({ className }) => (
       </div>
       <div>
         <Label htmlFor='price'>Preço</Label>
-        <InputRange format='decimal' />
+        <InputRange format='money' />
       </div>
     </div>
     <div className={styles.moreFilters}>
@@ -42,7 +42,7 @@ const Filters = ({ className }) => (
       </div>
       <div>
         <Label htmlFor='price'>Área(M²)</Label>
-        <InputRange format='int' />
+        <InputRange />
       </div>
     </div>
   </aside>

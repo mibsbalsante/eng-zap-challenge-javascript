@@ -6,8 +6,6 @@
 }
 
 .option {
-  padding: 4px 6px;
-
   &.current {
     border-color: var(--color-zap);
     color: var(--color-zap);
