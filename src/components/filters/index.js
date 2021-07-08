@@ -28,7 +28,7 @@ const Filters = ({ className }) => (
       </div>
       <div>
         <Label htmlFor='price'>Preço</Label>
-        <InputRange format='money' />
+        <InputRange field='price' format='money' />
       </div>
     </div>
     <div className={styles.moreFilters}>
@@ -41,8 +41,8 @@ const Filters = ({ className }) => (
         <Selection field='bathrooms' options={[1, 2, 3, 4]} textComplement='+' />
       </div>
       <div>
-        <Label htmlFor='price'>Área(M²)</Label>
-        <InputRange />
+        <Label htmlFor='square-meter'>Área(M²)</Label>
+        <InputRange field='square-meter' />
       </div>
     </div>
   </aside>
