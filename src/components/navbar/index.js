@@ -2,6 +2,7 @@ import React from 'react'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 
+import Container from '@comp/container'
 import logoGrupo from '@img/grupozap.png'
 import logoVivaReal from '@img/vivareal.png'
 import logoZap from '@img/zap.png'
@@ -10,7 +11,7 @@ import styles from './styles.css'
 
 const Navbar = () => (
   <header className={styles.navbar}>
-    <div className={styles.container}>
+    <Container>
       <Link
         to='/'
         alt='Mostrar todos os resultados'
@@ -34,7 +35,7 @@ const Navbar = () => (
           <img src={logoZap} alt='' />
         </Link>
       </nav>
-    </div>
+    </Container>
   </header>
 )
 

@@ -1,0 +1,13 @@
+.container {
+  max-width: var(--size-container);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  min-height: var(--size-navbar);
+  padding: 0 var(--space-container);
+
+  @media (--media-sm) {
+    padding: 0 var(--space-container-sm);
+  }
+}
