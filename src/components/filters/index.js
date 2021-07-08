@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import InputRange from '@comp/input-range'
+import Label from '@comp/label'
 import Selection from '@comp/selection'
 
 import styles from './styles.css'
@@ -11,7 +12,7 @@ const Filters = ({ className }) => (
   <aside className={classNames(styles.filters, className)}>
     <div className={styles.mainFilters}>
       <div>
-        <label>Finalidade</label>
+        <Label>Finalidade</Label>
         <Selection
           field='purpose'
           options={[
@@ -22,25 +23,25 @@ const Filters = ({ className }) => (
         />
       </div>
       <div>
-        <label>Quartos</label>
+        <Label>Quartos</Label>
         <Selection field='bedrooms' options={[1, 2, 3, 4]} textComplement='+' />
       </div>
       <div>
-        <label htmlFor='price'>Preço</label>
+        <Label htmlFor='price'>Preço</Label>
         <InputRange format='decimal' />
       </div>
     </div>
     <div className={styles.moreFilters}>
       <div>
-        <label>Vagas de garagem</label>
+        <Label>Vagas de garagem</Label>
         <Selection field='parking' options={[1, 2, 3, 4]} textComplement='+' />
       </div>
       <div>
-        <label>Banheiros</label>
+        <Label>Banheiros</Label>
         <Selection field='bathrooms' options={[1, 2, 3, 4]} textComplement='+' />
       </div>
       <div>
-        <label htmlFor='price'>Área(M²)</label>
+        <Label htmlFor='price'>Área(M²)</Label>
         <InputRange format='int' />
       </div>
     </div>
