@@ -8,15 +8,22 @@ import Selection from '@comp/selection'
 import styles from './styles.css'
 
 const Filters = ({ className }) => (
-  <form action='#' className={classNames(styles.filters, className)}>
+  <aside className={classNames(styles.filters, className)}>
     <div>
       <div>
-        <label htmlFor='purpose'>Finalidade</label>
-        <Selection options={[]} needsSelection={true} />
+        <label>Finalidade</label>
+        <Selection
+          field='purpose'
+          options={[
+            { value: 'all', label: 'Todos' },
+            { value: 'buy', label: 'Comprar' },
+            { value: 'rent', label: 'Alugar' },
+          ]}
+        />
       </div>
       <div>
-        <label htmlFor='bedrooms'>Quartos</label>
-        <Selection options={[]} />
+        <label>Quartos</label>
+        <Selection field='bedrooms' options={[1, 2, 3, 4]} textComplement='+' />
       </div>
       <div>
         <label htmlFor='price'>Preço</label>
@@ -24,18 +31,18 @@ const Filters = ({ className }) => (
       </div>
     </div>
     <div>
-      <label htmlFor='parking'>Vagas de garagem</label>
-      <Selection options={[]} />
+      <label>Vagas de garagem</label>
+      <Selection field='parking' options={[1, 2, 3, 4]} textComplement='+' />
     </div>
     <div>
-      <label htmlFor='bathroom'>Banheiros</label>
-      <Selection options={[]} />
+      <label>Banheiros</label>
+      <Selection field='bathrooms' options={[1, 2, 3, 4]} textComplement='+' />
     </div>
     <div>
       <label htmlFor='price'>Área(M²)</label>
       <InputRange format='int' />
     </div>
-  </form>
+  </aside>
 )
 
 Filters.propTypes = {
