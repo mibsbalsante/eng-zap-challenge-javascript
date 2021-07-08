@@ -10,25 +10,22 @@
   margin: 0 auto;
   min-height: var(--size-navbar);
   padding: 0 var(--space-container);
+
+  @media (--media-sm) {
+    padding: 0 var(--space-container-sm);
+  }
 }
 
 .navigation {
   display: flex;
+  justify-content: flex-end;
   align-items: stretch;
   width: 100%;
-  margin: 0 auto 0 24px;
-  padding-left: 25px;
+  padding-left: calc(var(--space-container) * 2);
   position: relative;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    height: 36px;
-    width: 1px;
-    background-color: var(--color-white);
+  @media (--media-sm) {
+    padding-left: var(--space-container);
   }
 }
 
@@ -37,12 +34,14 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 180px;
+  max-width: 140px;
   padding: 0 8px;
   border-radius: var(--size-border-radius);
+  height: var(--size-navbar-content);
 
   img {
-    max-height: 60%;
+    max-width: 80%;
+    max-height: 50%;
   }
 
   &Vivareal {
@@ -55,12 +54,19 @@
 
   & + & {
     margin-left: 16px;
+
+    @media (--media-xs) {
+      margin-left: 8px;
+    }
   }
 }
 
 .linkHome {
+  padding: 0;
+  max-width: fit-content;
+
   img {
-    max-width: 180px;
+    max-width: 140px;
     margin-top: 6px;
   }
 }

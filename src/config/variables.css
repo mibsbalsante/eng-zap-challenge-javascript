@@ -24,11 +24,13 @@
 
   /* Sizes */
   --size-navbar: 64px;
+  --size-navbar-content: 48px;
   --size-container: 1248px;
   --size-border-radius: 100px;
 
   /* Spacing */
   --space-container: 24px;
+  --space-container-sm: 12px;
 
   /* Transitions */
   --transition-partial: 0.3s ease-in-out;

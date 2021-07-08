@@ -5,6 +5,9 @@
   body,
   input {
     font-family: "Open Sans", Helvetica, sans-serif;
+  }
+
+  body {
     font-size: var(--fontsize-main);
   }
 
