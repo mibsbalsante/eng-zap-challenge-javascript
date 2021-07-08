@@ -3,7 +3,8 @@
 
 :root {
   body,
-  input {
+  input,
+  button {
     font-family: "Open Sans", Helvetica, sans-serif;
   }
 

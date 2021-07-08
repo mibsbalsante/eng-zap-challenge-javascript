@@ -17,6 +17,8 @@
   --color-shadow: rgba(0, 0, 0, 0.12);
   --color-white: #fefefe;
   --color-transparent: rgba(255, 255, 255, 0);
+  --color-grey-light: #f7f7f9;
+  --color-grey: #697b8e;
 
   /* Font sizes */
   --fontsize-main: 16px;
