@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 
+import { useContext } from '@context/apartments'
 import Container from '@comp/container'
 import Feed from '@comp/feed'
 import Filters from '@comp/filters'
@@ -14,14 +15,11 @@ const Home = ({ location }) => {
   const history = useHistory()
   const [company, setCompany] = useState(null)
 
+  const { dispatch } = useContext()
+
   const getApartments = useCallback(async () => {
     const apartments = await request()
-    console.info('>>apartments', apartments)
-    const locs = apartments.map(({ address }) => ({
-      city: address.city,
-      neighborhood: address.neighborhood,
-    }))
-    console.info('>>all locs', locs)
+    dispatch({ type: 'SET_APARTMENTS', payload: apartments })
   }, [])
 
   useEffect(getApartments, [])
