@@ -84,6 +84,7 @@ module.exports = (env, { mode }) => {
     },
     output: {
       path: path.resolve(__dirname, './dist'),
+      publicPath: '/',
       filename: 'index__[contenthash].js',
     },
     plugins: [
