@@ -1,11 +1,17 @@
 .selection {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(38px, 1fr));
-  grid-column-gap: 8px;
+  display: flex;
   padding: 4px 0 8px;
 }
 
 .option {
+  margin-left: 8px;
+  width: 100%;
+
+  &:first-child {
+    margin-left: 0;
+    width: auto;
+  }
+
   &.current {
     border-color: var(--color-zap);
     color: var(--color-zap);

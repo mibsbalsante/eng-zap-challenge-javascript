@@ -16,7 +16,6 @@ const Filters = ({ className }) => (
         <Selection
           field='purpose'
           options={[
-            { value: 'all', label: 'Todos' },
             { value: 'buy', label: 'Comprar' },
             { value: 'rent', label: 'Alugar' },
           ]}

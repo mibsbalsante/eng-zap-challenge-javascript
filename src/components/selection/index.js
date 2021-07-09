@@ -13,8 +13,11 @@ const Selection = ({ field, options, textComplement }) => {
 
   const [current, setCurrent] = useState({ value: '' })
 
-  const currentOptions = options.map(option =>
-    option.value ? option : { value: option, label: option }
+  const defaultOption = { value: '', label: 'Todos' }
+
+  const currentOptions = [defaultOption]
+  currentOptions.push(
+    ...options.map(option => (option.value ? option : { value: option, label: option }))
   )
 
   // needs to get selected value from route query
@@ -40,7 +43,7 @@ const Selection = ({ field, options, textComplement }) => {
           type='button'
         >
           {option.label}
-          {textComplement}
+          {option.value && textComplement}
         </button>
       ))}
     </div>
