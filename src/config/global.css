@@ -1,7 +1,7 @@
 @import "~@font/fontawesome-5.15.3/css/fontawesome.css";
 @import "~@font/fontawesome-5.15.3/css/solid.css";
 
-:root {
+:global {
   body,
   input,
   button {
