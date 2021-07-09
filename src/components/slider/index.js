@@ -1,72 +1,53 @@
 import React from 'react'
-import Carousel, {
-  Dots,
-  slidesToShowPlugin,
-  slidesToScrollPlugin,
-} from '@brainhubeu/react-carousel'
-import '@brainhubeu/react-carousel/lib/style.css'
+import PropTypes from 'prop-types'
+import Carousel from 'react-elastic-carousel'
 
+import SliderArrow from './arrow'
 import styles from './styles.css'
 
-const slides = [
-  <img
-    key={600}
-    onClick={({ target }) => console.info('>>click', target)}
-    src='https://picsum.photos/600/400'
-  />,
-  <img
-    key={601}
-    onClick={({ target }) => console.info('>>click', target)}
-    src='https://picsum.photos/601/400'
-  />,
-  <img
-    key={602}
-    onClick={({ target }) => console.info('>>click', target)}
-    src='https://picsum.photos/602/400'
-  />,
-  <img
-    key={603}
-    onClick={({ target }) => console.info('>>click', target)}
-    src='https://picsum.photos/603/400'
-  />,
-  <img
-    key={604}
-    onClick={({ target }) => console.info('>>click', target)}
-    src='https://picsum.photos/604/400'
-  />,
-  <img
-    key={605}
-    onClick={({ target }) => console.info('>>click', target)}
-    src='https://picsum.photos/605/400'
-  />,
-]
+const Slider = ({ images, type, height }) => {
+  const propsMinimal = {
+    pagination: false,
+    enableSwipe: false,
+    enableMouseSwipe: false,
+  }
 
-const Slider = () => (
-  <div className={styles.slider}>
-    <Carousel
-      animationSpeed={300}
-      itemWidth={600}
-      plugins={[
-        'arrows',
-        'infinite',
-        'fastSwipe',
-        {
-          resolve: slidesToShowPlugin,
-          options: {
-            numberOfSlides: 2,
-          },
-        },
-        {
-          resolve: slidesToScrollPlugin,
-          options: {
-            numberOfSlides: 2,
-          },
-        },
-      ]}
-      slides={slides}
-    />
-    <Dots number={slides.length} thumbnails={slides} value={1} />
-  </div>
-)
+  const propsFull = {}
+
+  const props = {
+    ...(type === 'minimal' ? propsMinimal : propsFull),
+    // eslint-disable-next-line react/display-name
+    renderArrow: props => <SliderArrow {...props} />,
+  }
+
+  return (
+    <div className={styles.slider}>
+      <Carousel itemsToShow={1} {...props}>
+        {images.map(url => (
+          <img
+            key={url}
+            height={height}
+            onClick={({ target }) => console.info('>>click', target)}
+            src={url}
+            className={styles.img}
+          />
+        ))}
+      </Carousel>
+    </div>
+  )
+}
+
+Slider.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.string),
+  type: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
+}
+
+Slider.defaultProps = {
+  images: [],
+  type: 'minimal',
+  height: 400,
+}
 
 export default Slider

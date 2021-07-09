@@ -1,4 +1,56 @@
 .slider {
-  padding: 0 50px;
+  position: relative;
+
+  .img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* remove lib padding outside slides */
+  :global {
+    .rec-slider-container {
+      margin: 0;
+    }
+  }
 }
 
+.indicator {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  padding: 8px 0;
+}
+
+.arrow {
+  appearance: none;
+  border: 0;
+  position: absolute;
+  top: 0;
+  background-color: var(--color-transparent);
+  height: 100%;
+  width: 40px;
+  padding: 0;
+  z-index: 1;
+  transition: var(--transition-primary);
+
+  &[disabled] {
+    opacity: 0;
+    cursor: default;
+  }
+
+  &.prev {
+    left: 0;
+
+    .indicator {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+
+  &.next {
+    right: 0;
+
+    .indicator {
+      border-radius: 4px 0 0 4px;
+    }
+  }
+}
