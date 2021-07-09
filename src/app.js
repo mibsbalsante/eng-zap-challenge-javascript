@@ -14,7 +14,7 @@ const App = () => (
     <Router>
       <Navbar />
       <Switch>
-        <Route path='/imovel' component={Details} />
+        <Route exact path='/imovel/:id' component={Details} />
         <Route path='/' component={Home} />
       </Switch>
     </Router>
