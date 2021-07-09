@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import Slider from '@comp/slider'
+
 import styles from './styles.css'
 
 const Card = ({
@@ -15,9 +17,10 @@ const Card = ({
   pricingInfos,
 }) => (
   <article className={styles.card}>
-    <Link to={`/imovel/${id}`}>
-      <img src={images[0]} alt='' />
-      <div>
+    <div>
+      <Slider images={images} height={180} width={200} />
+
+      <Link to={`/imovel/${id}`}>
         {address.geoLocation.precision !== 'NO_GEOCODE' ? (
           <p>
             {address.neighborhood}, {address.city}
@@ -46,8 +49,8 @@ const Card = ({
             <span>{parkingSpaces}v</span>
           </p>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   </article>
 )
 
