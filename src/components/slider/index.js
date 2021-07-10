@@ -1,11 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import Carousel from 'react-elastic-carousel'
 
 import SliderArrow from './arrow'
 import styles from './styles.css'
 
-const Slider = ({ images, type, height }) => {
+const Slider = ({ images, type, height, className }) => {
   const propsMinimal = {
     pagination: false,
     enableSwipe: false,
@@ -21,7 +22,7 @@ const Slider = ({ images, type, height }) => {
   }
 
   return (
-    <div className={styles.slider}>
+    <div className={classNames(styles.slider, className)} style={{ height }}>
       <Carousel itemsToShow={1} {...props}>
         {images.map(url => (
           <img
@@ -40,14 +41,15 @@ const Slider = ({ images, type, height }) => {
 Slider.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string),
   type: PropTypes.string,
-  height: PropTypes.number,
-  width: PropTypes.number,
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  className: PropTypes.string,
 }
 
 Slider.defaultProps = {
   images: [],
   type: 'minimal',
-  height: 400,
+  height: '100%',
+  className: undefined,
 }
 
 export default Slider
