@@ -1,0 +1,33 @@
+.card {
+  display: flex;
+  box-shadow: var(--boxshadow);
+}
+
+.slider {
+  min-width: 360px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 16px;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.address {
+  margin: 0;
+  color: var(--color-grey);
+  font-weight: 600;
+  font-size: var(--fontsize-xs);
+}
+
+.price {
+  font-size: var(--fontsize-lg);
+  margin: 12px 0 16px;
+}
+
+.rent {
+  font-size: var(--fontsize-sm);
+}

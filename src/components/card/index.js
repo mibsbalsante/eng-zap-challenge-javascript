@@ -2,9 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import IconInfos from '@comp/icon-infos'
 import Slider from '@comp/slider'
 
 import styles from './styles.css'
+
+const formatCurrency = value =>
+  Number(value)
+    .toFixed(2)
+    .replace(/\./g, ',')
+    .replace(/\d(?=(\d{3})+,)/g, '$&.')
 
 const Card = ({
   id,
@@ -17,40 +24,36 @@ const Card = ({
   pricingInfos,
 }) => (
   <article className={styles.card}>
-    <div>
-      <Slider images={images} height={180} width={200} />
+    <Slider images={images} height={240} className={styles.slider} />
 
-      <Link to={`/imovel/${id}`}>
-        {address.geoLocation.precision !== 'NO_GEOCODE' ? (
-          <p>
-            {address.neighborhood}, {address.city}
-          </p>
+    <Link to={`/imovel/${id}`} className={styles.content}>
+      <p className={styles.address}>
+        {address.geoLocation.precision === 'NO_GEOCODE' || !address.city ? (
+          <>Pergunte o endereço</>
         ) : (
-          <p>Pergunte o endereço</p>
+          <>
+            {address.neighborhood}, {address.city}
+          </>
         )}
-        <p>
-          {pricingInfos.businessType === 'SALE' ? (
-            <span>Preço: R$ {pricingInfos.price}</span>
-          ) : (
-            <span>Aluguel: R$ {pricingInfos.rentalTotalPrice}</span>
-          )}
-        </p>
-        <div>
-          <p>
-            <span>{usableAreas}m²</span>
-          </p>
-          <p>
-            <span>{bedrooms}q</span>
-          </p>
-          <p>
-            <span>{bathrooms}b</span>
-          </p>
-          <p>
-            <span>{parkingSpaces}v</span>
-          </p>
-        </div>
-      </Link>
-    </div>
+      </p>
+
+      <p className={styles.price}>
+        {pricingInfos.businessType === 'SALE' ? (
+          <span>R$ {formatCurrency(pricingInfos.price)}</span>
+        ) : (
+          <>
+            <span>R$ {formatCurrency(pricingInfos.rentalTotalPrice)}</span>
+            <span className={styles.rent}>{'/mês'}</span>
+          </>
+        )}
+      </p>
+      <IconInfos
+        bathrooms={bathrooms}
+        bedrooms={bedrooms}
+        parkingSpaces={parkingSpaces}
+        usableAreas={usableAreas}
+      />
+    </Link>
   </article>
 )
 
