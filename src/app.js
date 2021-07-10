@@ -4,7 +4,7 @@ import '@font/fontawesome-5.15.3/css/solid.css'
 import '@config/global.css'
 
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import ApartmentsProvider from '@context/apartments'
 import Home from '@page/home'
@@ -17,7 +17,8 @@ const App = () => (
       <Navbar />
       <Switch>
         <Route exact path='/imovel/:id' component={Details} />
-        <Route path='/' component={Home} />
+        <Route exact path={['/', '/vivareal', '/zap']} component={Home} />
+        <Redirect to='/' />
       </Switch>
     </Router>
   </ApartmentsProvider>
