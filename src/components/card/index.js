@@ -47,6 +47,14 @@ const Card = ({
           </>
         )}
       </p>
+
+      {pricingInfos.monthlyCondoFee > 0 && (
+        <p className={styles.condo}>
+          Condomínio{' '}
+          <span className={styles.condoFee}>R$ {formatCurrency(pricingInfos.monthlyCondoFee)}</span>
+        </p>
+      )}
+
       <IconInfos
         bathrooms={bathrooms}
         bedrooms={bedrooms}
@@ -73,6 +81,7 @@ Card.propTypes = {
   usableAreas: PropTypes.number.isRequired,
   pricingInfos: PropTypes.shape({
     businessType: PropTypes.string,
+    monthlyCondoFee: PropTypes.string,
     price: PropTypes.string,
     rentalTotalPrice: PropTypes.string,
   }).isRequired,

@@ -1,10 +1,24 @@
 .card {
   display: flex;
   box-shadow: var(--boxshadow);
+
+  @media (--media-xs) {
+    flex-wrap: wrap;
+  }
 }
 
 .slider {
   min-width: 360px;
+
+  @media (--media-lg) {
+    min-width: 45%;
+    max-width: 360px;
+  }
+
+  @media (--media-xs) {
+    width: 100%;
+    max-width: unset;
+  }
 }
 
 .content {
@@ -25,9 +39,19 @@
 
 .price {
   font-size: var(--fontsize-lg);
-  margin: 12px 0 16px;
+  margin: 8px 0 12px;
 }
 
 .rent {
+  color: var(--color-grey);
   font-size: var(--fontsize-sm);
+}
+
+.condo {
+  font-size: var(--fontsize-xs);
+  margin: 0 0 12px;
+
+  &Fee {
+    font-weight: 600;
+  }
 }
