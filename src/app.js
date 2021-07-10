@@ -1,4 +1,6 @@
 import 'sanitize.css'
+import '@font/fontawesome-5.15.3/css/fontawesome.css'
+import '@font/fontawesome-5.15.3/css/solid.css'
 import '@config/global.css'
 
 import React from 'react'
