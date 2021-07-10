@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { useHistory, useLocation } from 'react-router-dom'
 
+import { useContext } from '@context/apartments'
 import helperStyles from '@config/helper-classes.css'
 
 import styles from './styles.css'
 
-const Selection = ({ field, options, textComplement }) => {
-  let history = useHistory()
-  let location = useLocation()
-
-  const [current, setCurrent] = useState({ value: '' })
+const Selection = ({ current, field, options, textComplement }) => {
+  const { dispatch } = useContext()
 
   const defaultOption = { value: '', label: 'Todos' }
 
@@ -20,25 +17,17 @@ const Selection = ({ field, options, textComplement }) => {
     ...options.map(option => (option.value ? option : { value: option, label: option }))
   )
 
-  // needs to get selected value from route query
-  useEffect(() => {
-    setCurrent(currentOptions[0])
-  }, [])
-
   return (
     <div className={styles.selection}>
       {currentOptions.map(option => (
         <button
           key={option.value}
           className={classNames(helperStyles.formControl, styles.option, {
-            [styles.current]: current && current.value === option.value,
+            [styles.current]: current === option.value,
           })}
           onClick={() => {
-            setCurrent(option)
-            history.push({
-              pathname: location.pathname,
-              search: `?${field}=${option.value}`,
-            })
+            if (current !== option.value)
+              dispatch({ type: 'SET_FILTERS', payload: { [field]: option.value } })
           }}
           type='button'
         >
@@ -51,6 +40,7 @@ const Selection = ({ field, options, textComplement }) => {
 }
 
 Selection.propTypes = {
+  current: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   field: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([

@@ -15,7 +15,7 @@ const Home = ({ location }) => {
   const history = useHistory()
   const [company, setCompany] = useState(null)
 
-  const { dispatch } = useContext()
+  const { state, dispatch } = useContext()
 
   const getApartments = useCallback(async () => {
     const apartments = await request()
@@ -25,16 +25,30 @@ const Home = ({ location }) => {
   useEffect(getApartments, [])
 
   useEffect(() => {
-    // TODO: move it to a HOC
-    history.listen(location => {
-      const query = new URLSearchParams(location.search)
-      const queryEntries = []
+    const query = new URLSearchParams(location.search)
+    let queryEntries = {}
 
-      query.forEach((value, key) => {
-        queryEntries.push({ value, key })
-      })
+    query.forEach((value, key) => {
+      queryEntries = { ...queryEntries, ...{ [key]: value } }
     })
+
+    dispatch({ type: 'SET_FILTERS', payload: queryEntries })
   }, [])
+
+  useEffect(() => {
+    // only change routes with filters after first load
+    if (state.firstLoad) return
+
+    const search = state.knownFilters.reduce((queryString, key) => {
+      if (state[key]) queryString = `${queryString}${key}=${state[key]}&`
+      return queryString
+    }, '?')
+
+    history.push({
+      pathname: location.pathname,
+      search: search,
+    })
+  }, [state.bedrooms, state.bathrooms, state.parking, state.purpose, state.page])
 
   useEffect(() => {
     if (location.pathname !== '/') setCompany(location.pathname.slice(1))

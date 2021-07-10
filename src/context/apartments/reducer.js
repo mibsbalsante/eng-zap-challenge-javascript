@@ -1,10 +1,10 @@
 export const initialState = {
   company: '',
   // filters
-  purpose: 'all',
-  bedrooms: 1,
-  parking: 1,
-  bathrooms: 1,
+  bedrooms: '',
+  bathrooms: '',
+  parking: '',
+  purpose: '',
   priceRange: [],
   squareMetersRange: [],
   // pagination
@@ -14,6 +14,9 @@ export const initialState = {
   apartments: [],
   // current filter results
   results: [],
+  knownFilters: ['bedrooms', 'bathrooms', 'parking', 'purpose', 'page'],
+  // homepage first load (get query params from url)
+  firstLoad: true,
 }
 
 export const reducer = (state, action) => {
@@ -27,6 +30,45 @@ export const reducer = (state, action) => {
         ...state,
         apartments: apartments,
         results: (apartments || []).slice(0, state.pageResults),
+      }
+    }
+    case 'SET_FILTERS': {
+      // replace the filter even if the value doesnt exist ("all" selection)
+      const filters = state.knownFilters.reduce((all, key) => {
+        if (key in action.payload) {
+          let value = action.payload[key]
+
+          // '' values are falsy and parse to 0, don't parse falsy values
+          if (value && !Number.isNaN(Number(value))) value = Number(value)
+
+          all = { ...all, ...{ [key]: value || '' } }
+        }
+
+        return all
+      }, {})
+
+      const oldFilters = state.knownFilters.reduce((all, key) => {
+        if (state[key]) all = { ...all, ...{ [key]: state[key] } }
+
+        return all
+      }, {})
+
+      const needsPageReset =
+        Object.entries(filters).toString() !== Object.entries(oldFilters).toString()
+
+      const page = needsPageReset && !state.firstLoad ? { page: 1 } : {}
+
+      return {
+        ...state,
+        ...filters,
+        firstLoad: false,
+        ...page,
+      }
+    }
+    case 'SET_PAGE': {
+      return {
+        ...state,
+        page: action.payload,
       }
     }
   }
