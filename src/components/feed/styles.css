@@ -1,12 +1,13 @@
 .feed {
   display: grid;
   grid-row-gap: 24px;
+  padding-bottom: 32px;
 
   @media (--media-sm) {
-    padding-top: 24px;
+    padding: 24px 0;
   }
 
   @media (--media-xs) {
-    padding-top: 12px;
+    padding: 12px 0;
   }
 }
