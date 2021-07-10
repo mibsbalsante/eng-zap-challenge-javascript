@@ -19,7 +19,12 @@ module.exports = (env, { mode }) => {
       rules: [
         {
           test: /\.css$/,
-          exclude: /node_modules/,
+          include: [/node_modules/, /src\/assets/],
+          use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        },
+        {
+          test: /\.css$/,
+          exclude: [/node_modules/, /src\/assets/],
           use: [
             MiniCssExtractPlugin.loader,
             {
@@ -27,18 +32,12 @@ module.exports = (env, { mode }) => {
               options: {
                 importLoaders: 1,
                 modules: {
-                  localIdentName: devMode ? '[local]' : '[local]__[hash:base64:5]',
+                  localIdentName: '[local]__[hash:base64:5]',
                 },
               },
             },
             'postcss-loader',
           ],
-        },
-        {
-          test: /\.css$/,
-          include: /node_modules/,
-          exclude: /src/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
         },
         {
           test: /\.html$/,
@@ -48,7 +47,7 @@ module.exports = (env, { mode }) => {
         },
         {
           test: /\.js$/,
-          exclude: /(node_modules)/,
+          exclude: /node_modules/,
           use: { loader: 'babel-loader' },
         },
         {
