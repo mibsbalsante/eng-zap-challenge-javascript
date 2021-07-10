@@ -6,11 +6,11 @@
   border-color: var(--color-grey);
   background-color: var(--color-white);
   color: var(--color-grey);
-  font-size: var(--fontsize-sm);
+  font-size: var(--fontsize-xs);
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 6px 8px;
+  padding: 8px;
   font-weight: 600;
   border-radius: var(--size-border-radius);
   transition: border-color var(--transition-partial), color var(--transition-partial);
