@@ -14,6 +14,7 @@
 
   &.current {
     border-color: var(--color-zap);
-    color: var(--color-zap);
+    background-color: var(--color-zap);
+    color: var(--color-white);
   }
 }
