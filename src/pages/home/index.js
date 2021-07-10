@@ -46,6 +46,7 @@ const Home = ({ location }) => {
       <div className={styles.pageHome}>
         <Filters className={styles.pageHomeFilters} />
         {company && <p>Mostrando apenas imóveis de {company}</p>}
+        <Pagination className={styles.pageHomePaginationTop} />
         <Feed className={styles.pageHomeFeed} />
         <Pagination className={styles.pageHomePagination} />
       </div>
