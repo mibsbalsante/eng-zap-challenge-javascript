@@ -6,6 +6,7 @@
   input,
   button {
     font-family: "Open Sans", Helvetica, sans-serif;
+    font-size: var(--fontsize-main);
     line-height: 1.3;
   }
 
