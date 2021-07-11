@@ -24,7 +24,7 @@ const Details = ({ match }) => {
 
   return item ? (
     <div className={styles.pageDetails}>
-      <Slider images={images} height={600} />
+      <Slider images={images} height={600} type='full' />
 
       <p className={styles.address}>
         {geoLocation.precision === 'NO_GEOCODE' || !city ? (

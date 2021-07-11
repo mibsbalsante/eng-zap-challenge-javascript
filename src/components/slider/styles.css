@@ -1,6 +1,12 @@
 .slider {
   position: relative;
 
+  .slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
   .img {
     width: 100%;
     object-fit: cover;
@@ -50,5 +56,45 @@
   &.next {
     right: 0;
     padding-right: 6px;
+  }
+}
+
+.thumbnails {
+  display: flex;
+  justify-content: center;
+  padding-top: 16px;
+
+  .button {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    height: 60px;
+    width: 80px;
+    opacity: 0.4;
+    transition: opacity var(--transition-partial), transform var(--transition-partial);
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:focus,
+    &:hover,
+    &.isActive {
+      opacity: 1;
+    }
+
+    &.isActive {
+      transform: scale(1.1);
+    }
+
+    & + .button {
+      margin-left: 16px;
+    }
+  }
+
+  .image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 }
