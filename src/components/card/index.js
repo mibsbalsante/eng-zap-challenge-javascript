@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import { formatValue } from 'react-currency-input-field'
 
 import IconInfos from '@comp/icon-infos'
 import Slider from '@comp/slider'
@@ -8,10 +9,12 @@ import Slider from '@comp/slider'
 import styles from './styles.css'
 
 const formatCurrency = value =>
-  Number(value)
-    .toFixed(2)
-    .replace(/\./g, ',')
-    .replace(/\d(?=(\d{3})+,)/g, '$&.')
+  formatValue({
+    value: value,
+    groupSeparator: '.',
+    decimalSeparator: ',',
+    prefix: 'R$ ',
+  })
 
 const Card = ({
   id,
@@ -39,10 +42,10 @@ const Card = ({
 
       <p className={styles.price}>
         {pricingInfos.businessType === 'SALE' ? (
-          <span>R$ {formatCurrency(pricingInfos.price)}</span>
+          <span>{formatCurrency(pricingInfos.price)}</span>
         ) : (
           <>
-            <span>R$ {formatCurrency(pricingInfos.rentalTotalPrice)}</span>
+            <span>{formatCurrency(pricingInfos.rentalTotalPrice)}</span>
             <span className={styles.rent}>{'/mês'}</span>
           </>
         )}
@@ -51,7 +54,7 @@ const Card = ({
       {pricingInfos.monthlyCondoFee > 0 && (
         <p className={styles.condo}>
           Condomínio{' '}
-          <span className={styles.condoFee}>R$ {formatCurrency(pricingInfos.monthlyCondoFee)}</span>
+          <span className={styles.condoFee}>{formatCurrency(pricingInfos.monthlyCondoFee)}</span>
         </p>
       )}
 
