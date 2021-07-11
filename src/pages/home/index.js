@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 
@@ -7,7 +7,6 @@ import Container from '@comp/container'
 import Feed from '@comp/feed'
 import Filters from '@comp/filters'
 import Pagination from '@comp/pagination'
-import request from '@util/request'
 
 import styles from './styles.css'
 
@@ -16,13 +15,6 @@ const Home = ({ location }) => {
   const [company, setCompany] = useState(null)
 
   const { state, dispatch } = useContext()
-
-  const getApartments = useCallback(async () => {
-    const apartments = await request()
-    dispatch({ type: 'SET_APARTMENTS', payload: apartments })
-  }, [])
-
-  useEffect(getApartments, [])
 
   // TODO: move all searchparams logic to a hoc
   useEffect(() => {

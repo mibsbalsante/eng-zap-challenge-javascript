@@ -6,6 +6,7 @@ import '@config/global.css'
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
+import withApartments from '@hoc/apartments'
 import ApartmentsProvider from '@context/apartments'
 import Home from '@page/home'
 import Details from '@page/details'
@@ -16,8 +17,8 @@ const App = () => (
     <Router>
       <Navbar />
       <Switch>
-        <Route exact path='/imovel/:id' component={Details} />
-        <Route exact path={['/', '/vivareal', '/zap']} component={Home} />
+        <Route exact path='/imovel/:id' component={withApartments(Details)} />
+        <Route exact path={['/', '/vivareal', '/zap']} component={withApartments(Home)} />
         <Redirect to='/' />
       </Switch>
     </Router>

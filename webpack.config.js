@@ -103,6 +103,7 @@ module.exports = (env, { mode }) => {
         '@context': path.resolve(__dirname, 'src/context'),
         '@comp': path.resolve(__dirname, 'src/components'),
         '@font': path.resolve(__dirname, 'src/assets/fonts'),
+        '@hoc': path.resolve(__dirname, 'src/hocs'),
         '@img': path.resolve(__dirname, 'src/assets/img'),
         '@page': path.resolve(__dirname, 'src/pages'),
         '@util': path.resolve(__dirname, 'src/utils'),
