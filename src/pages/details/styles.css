@@ -1,0 +1,13 @@
+.marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: var(--color-navbar);
+  border-radius: 100%;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  cursor: default;
+  opacity: 0.4;
+}

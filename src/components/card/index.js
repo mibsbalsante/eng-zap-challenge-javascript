@@ -24,7 +24,7 @@ const Card = ({
     <Link to={`/imovel/${id}`} className={styles.content}>
       <p className={styles.address}>
         {address.geoLocation.precision === 'NO_GEOCODE' || !address.city ? (
-          <>Pergunte o endereço</>
+          <>São Paulo</>
         ) : (
           <>
             {address.neighborhood}, {address.city}

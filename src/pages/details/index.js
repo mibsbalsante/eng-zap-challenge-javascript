@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import GoogleMapReact from 'google-map-react'
 
 import { useContext } from '@context/apartments'
 import IconInfos from '@comp/icon-infos'
 import Slider from '@comp/slider'
 import formatCurrency from '@util/format-currency'
+import getAddressFromCoords from '@util/get-address-from-coords'
 
 import styles from './styles.css'
 
@@ -18,13 +20,15 @@ const Details = ({ match }) => {
     item || {}
   const { geoLocation, city, neighborhood } = address || {}
 
+  const [street, setStreet] = useState(null)
+
   return item ? (
     <div className={styles.pageDetails}>
       <Slider images={images} height={600} />
 
       <p className={styles.address}>
         {geoLocation.precision === 'NO_GEOCODE' || !city ? (
-          <>Pergunte o endereço</>
+          <>São Paulo</>
         ) : (
           <>
             {neighborhood}, {city}
@@ -42,6 +46,13 @@ const Details = ({ match }) => {
           </>
         )}
       </p>
+
+      <IconInfos
+        bathrooms={bathrooms}
+        bedrooms={bedrooms}
+        parkingSpaces={parkingSpaces}
+        usableAreas={usableAreas}
+      />
 
       <div>
         {pricingInfos.monthlyCondoFee > 0 && (
@@ -65,17 +76,37 @@ const Details = ({ match }) => {
       </div>
 
       {geoLocation && (
-        <div>
-          map coords: lat ({geoLocation.location.lat}) lon ({geoLocation.location.lon})
-        </div>
-      )}
+        <section>
+          {street && <p>{street}</p>}
 
-      <IconInfos
-        bathrooms={bathrooms}
-        bedrooms={bedrooms}
-        parkingSpaces={parkingSpaces}
-        usableAreas={usableAreas}
-      />
+          <div style={{ height: '480px', width: '100%' }}>
+            <GoogleMapReact
+              bootstrapURLKeys={{
+                key: process.env.MAPS_API_KEY,
+                language: 'pt-BR',
+                region: 'br',
+                libraries: ['geocoder'],
+              }}
+              defaultCenter={{ lat: geoLocation.location.lat, lng: geoLocation.location.lon }}
+              defaultZoom={12}
+              yesIWantToUseGoogleMapApiInternals
+              onGoogleApiLoaded={({ maps }) => {
+                getAddressFromCoords({
+                  Geocoder: new maps.Geocoder(),
+                  location: { lat: geoLocation.location.lat, lng: geoLocation.location.lon },
+                  callback: setStreet,
+                })
+              }}
+            >
+              <div
+                lat={geoLocation.location.lat}
+                lng={geoLocation.location.lon}
+                className={styles.marker}
+              ></div>
+            </GoogleMapReact>
+          </div>
+        </section>
+      )}
     </div>
   ) : (
     <></>
