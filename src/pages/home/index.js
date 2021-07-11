@@ -24,31 +24,69 @@ const Home = ({ location }) => {
 
   useEffect(getApartments, [])
 
+  // TODO: move all searchparams logic to a hoc
   useEffect(() => {
     const query = new URLSearchParams(location.search)
-    let queryEntries = {}
+    const params = Object.fromEntries(query.entries())
+    const parseToNumber = val => Number(val) || 0
+    const rangeParams = {
+      priceRange: {
+        field: 'priceRange',
+        value: { min: parseToNumber(params.priceMin), max: parseToNumber(params.priceMax) },
+      },
+      squareMetersRange: {
+        field: 'squareMetersRange',
+        value: { min: parseToNumber(params.areasMin), max: parseToNumber(params.areasMax) },
+      },
+    }
 
-    query.forEach((value, key) => {
-      queryEntries = { ...queryEntries, ...{ [key]: value } }
+    dispatch({ type: 'SET_FILTERS', payload: params })
+    dispatch({ type: 'SET_RANGE_FIELD', payload: rangeParams.priceRange })
+    dispatch({
+      type: 'SET_RANGE_FIELD',
+      payload: rangeParams.squareMetersRange,
     })
-
-    dispatch({ type: 'SET_FILTERS', payload: queryEntries })
   }, [])
 
   useEffect(() => {
-    // only change routes with filters after first load
+    // prevents filter reset at first page load, changing search params only after it
     if (state.firstLoad) return
 
-    const search = state.knownFilters.reduce((queryString, key) => {
-      if (state[key]) queryString = `${queryString}${key}=${state[key]}&`
-      return queryString
-    }, '?')
+    const params = new URLSearchParams(location.search)
+    state.knownFilters.map(key => {
+      params.set(key, state[key])
+    })
 
     history.push({
       pathname: location.pathname,
-      search: search,
+      search: params.toString(),
     })
+    dispatch({ type: 'FIRST_LOAD' })
   }, [state.bedrooms, state.bathrooms, state.parking, state.purpose, state.page])
+
+  useEffect(() => {
+    const paramsRange = [
+      {
+        param: 'priceMin',
+        value: state.priceRange.min,
+      },
+      { param: 'priceMax', value: state.priceRange.max },
+      { param: 'areasMin', value: state.squareMetersRange.min },
+      { param: 'areasMax', value: state.squareMetersRange.max },
+    ]
+
+    const paramsToURL = paramsRange.filter(({ value }) => !!value)
+
+    const params = new URLSearchParams(location.search)
+    paramsToURL.map(({ param, value }) => {
+      params.set(param, value)
+    })
+
+    history.push({
+      pathname: location.pathname,
+      search: params.toString(),
+    })
+  }, [state.priceRange, state.squareMetersRange])
 
   useEffect(() => {
     if (location.pathname !== '/') setCompany(location.pathname.slice(1))

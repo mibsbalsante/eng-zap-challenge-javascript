@@ -5,8 +5,8 @@ export const initialState = {
   bathrooms: '',
   parking: '',
   purpose: '',
-  priceRange: { min: 0, max: null },
-  squareMetersRange: { min: 0, max: null },
+  priceRange: { min: 0, max: 0 },
+  squareMetersRange: { min: 0, max: 0 },
   // pagination
   page: 1,
   pageResults: 20,
@@ -72,10 +72,17 @@ export const reducer = (state, action) => {
       }
     }
     case 'SET_RANGE_FIELD': {
+      // TODO: duplicate logic, refactor it
+      const needsPageReset =
+        Object.entries(state[action.payload.field]).toString() !==
+        Object.entries(action.payload.value).toString()
+
+      const page = needsPageReset && !state.firstLoad ? { page: 1 } : {}
+
       return {
         ...state,
         [action.payload.field]: action.payload.value,
-        page: 1,
+        ...page,
       }
     }
     case 'SET_PAGE': {

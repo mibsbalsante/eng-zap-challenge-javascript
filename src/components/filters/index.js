@@ -36,7 +36,7 @@ const Filters = ({ className }) => (
           </div>
           <div>
             <Label htmlFor='priceRange'>Preço</Label>
-            <InputRange field='priceRange' format='money' />
+            <InputRange field='priceRange' param='price' format='money' />
           </div>
         </div>
         <div className={styles.moreFilters}>
@@ -60,7 +60,7 @@ const Filters = ({ className }) => (
           </div>
           <div>
             <Label htmlFor='squareMetersRange'>Área(M²)</Label>
-            <InputRange field='squareMetersRange' />
+            <InputRange field='squareMetersRange' param='areas' />
           </div>
         </div>
       </aside>
