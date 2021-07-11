@@ -1,20 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import { formatValue } from 'react-currency-input-field'
 
 import IconInfos from '@comp/icon-infos'
 import Slider from '@comp/slider'
+import formatCurrency from '@util/format-currency'
 
 import styles from './styles.css'
-
-const formatCurrency = value =>
-  formatValue({
-    value: value,
-    groupSeparator: '.',
-    decimalSeparator: ',',
-    prefix: 'R$ ',
-  })
 
 const Card = ({
   id,
