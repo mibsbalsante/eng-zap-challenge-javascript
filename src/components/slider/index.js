@@ -9,7 +9,8 @@ import styles from './styles.css'
 
 const Slider = ({ images, type, height, className }) => {
   const carouselRef = useRef()
-  const [isHoverStateActive, setIsHoverStateActive] = useState(false)
+  const [isHoverStateActive, setHoverStateActive] = useState(false)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const propsMinimal = {
     pagination: false,
@@ -27,6 +28,7 @@ const Slider = ({ images, type, height, className }) => {
     ],
     // eslint-disable-next-line react/display-name
     renderPagination: props => <SliderThumbnails {...props} images={images} />,
+    onChange: (_, pageIndex) => setCurrentSlide(pageIndex),
   }
 
   const props = {
@@ -36,9 +38,9 @@ const Slider = ({ images, type, height, className }) => {
   }
 
   // pause on mouseover (autoplay only active >= 768px)
-  const handleMouseOver = () => setIsHoverStateActive(true)
+  const handleMouseOver = () => setHoverStateActive(true)
 
-  const handleMouseOut = () => setIsHoverStateActive(false)
+  const handleMouseOut = () => setHoverStateActive(false)
 
   useEffect(() => {
     const { sliderContainer } = carouselRef.current
@@ -57,9 +59,19 @@ const Slider = ({ images, type, height, className }) => {
   return (
     <div className={classNames(styles.slider, className)}>
       <Carousel ref={carouselRef} itemsToShow={1} {...props}>
-        {images.map(url => (
+        {images.map((url, ind) => (
           <div key={url} className={styles.slide}>
             <img height={height} src={url} className={styles.img} />
+            {type === 'full' && (
+              <a
+                target='_blank'
+                rel='noopener noreferrer'
+                href={currentSlide === ind ? url : '#'}
+                className={classNames(styles.newTab, { [styles.isVisible]: currentSlide === ind })}
+              >
+                <i className='fas fa-camera' /> <span>Expandir</span>
+              </a>
+            )}
           </div>
         ))}
       </Carousel>

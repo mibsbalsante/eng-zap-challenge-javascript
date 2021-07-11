@@ -13,6 +13,37 @@
     object-position: center;
   }
 
+  .newTab {
+    opacity: 0;
+    cursor: default;
+    position: absolute;
+    right: 48px;
+    bottom: 24px;
+    display: flex;
+    align-items: center;
+    border-radius: var(--size-border-radius);
+    background-color: color-mod(var(--color-secondary), a(70%));
+    color: var(--color-white);
+    font-size: var(--fontsize-sm);
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color var(--transition-partial), opacity var(--transition-partial);
+
+    &:focus,
+    &:hover {
+      background: var(--color-secondary);
+    }
+
+    &.isVisible {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    span {
+      margin-left: 8px;
+    }
+  }
+
   /* remove lib padding outside slides */
   :global {
     .rec-slider-container {
