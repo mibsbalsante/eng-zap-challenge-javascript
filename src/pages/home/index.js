@@ -97,7 +97,7 @@ const Home = ({ location }) => {
     <Container>
       <div className={styles.pageHome}>
         <Filters className={styles.pageHomeFilters} />
-        {company && <p>Mostrando apenas imóveis de {company}</p>}
+        {company && <p>Mostrando apenas imóveis de {state.companies[company]}</p>}
         <Pagination className={styles.pageHomePaginationTop} />
         <Feed className={styles.pageHomeFeed} />
         <Pagination className={styles.pageHomePagination} />

@@ -17,6 +17,10 @@ export const initialState = {
   knownFilters: ['bedrooms', 'bathrooms', 'parking', 'purpose', 'page'],
   // homepage first load (get query params from url)
   firstLoad: true,
+  companies: {
+    zap: 'Zap Imóveis',
+    vivareal: 'Viva Real',
+  },
 }
 
 export const reducer = (state, action) => {
