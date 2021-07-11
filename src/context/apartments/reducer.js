@@ -5,8 +5,8 @@ export const initialState = {
   bathrooms: '',
   parking: '',
   purpose: '',
-  priceRange: [],
-  squareMetersRange: [],
+  priceRange: { min: 0, max: null },
+  squareMetersRange: { min: 0, max: null },
   // pagination
   page: 1,
   pageResults: 20,
@@ -63,6 +63,13 @@ export const reducer = (state, action) => {
         ...filters,
         firstLoad: false,
         ...page,
+      }
+    }
+    case 'SET_RANGE_FIELD': {
+      return {
+        ...state,
+        [action.payload.field]: action.payload.value,
+        page: 1,
       }
     }
     case 'SET_PAGE': {
