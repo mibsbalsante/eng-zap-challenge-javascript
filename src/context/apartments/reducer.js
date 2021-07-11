@@ -23,6 +23,12 @@ export const reducer = (state, action) => {
   // show first page only
   // todo: filters/company
   switch (action.type) {
+    case 'FIRST_LOAD': {
+      return {
+        ...state,
+        firstLoad: false,
+      }
+    }
     case 'SET_APARTMENTS': {
       const apartments = action.payload
 
