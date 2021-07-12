@@ -44,7 +44,7 @@ export const applyFilters = ({
   return filterResults
 }
 
-export const applyPage = (filterResults, state) => {
-  const firstInd = state.pageResults * filterResults - state.pageResults
-  return filterResults.slice(firstInd, state.pageResults)
+export const applyPage = (filterResults, page, state) => {
+  const firstInd = state.pageResults * page - state.pageResults
+  return filterResults.slice(firstInd, firstInd + state.pageResults)
 }
