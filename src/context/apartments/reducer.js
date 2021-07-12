@@ -1,11 +1,12 @@
 import filterByCompany from '@util/filter-by-company'
+import { applyFilters, applyPage } from '@util/filter-utils'
 
 export const initialState = {
   company: '',
   // filters
   bedrooms: '',
   bathrooms: '',
-  parking: '',
+  parkingSpaces: '',
   purpose: '',
   priceRange: { min: 0, max: 0 },
   squareMetersRange: { min: 0, max: 0 },
@@ -17,8 +18,9 @@ export const initialState = {
   apartmentsVivaReal: [],
   apartmentsZap: [],
   // current filter results
+  filterResults: [],
   results: [],
-  knownFilters: ['bedrooms', 'bathrooms', 'parking', 'purpose', 'page'],
+  knownFilters: ['bedrooms', 'bathrooms', 'parkingSpaces', 'purpose', 'page'],
   // homepage first load (get query params from url)
   firstLoad: true,
   companies: {
@@ -55,6 +57,7 @@ export const reducer = (state, action) => {
         apartments: validApartments,
         apartmentsVivaReal: listByCompany.vivaReal,
         apartmentsZap: listByCompany.zap,
+        filterResults: validApartments || [],
         results: (validApartments || []).slice(0, state.pageResults),
       }
     }
@@ -84,11 +87,19 @@ export const reducer = (state, action) => {
 
       const page = needsPageReset && !state.firstLoad ? { page: 1 } : {}
 
-      return {
+      const newState = {
         ...state,
         ...filters,
-        firstLoad: false,
         ...page,
+        firstLoad: false,
+      }
+
+      const filterResults = applyFilters(newState)
+
+      return {
+        ...newState,
+        filterResults,
+        results: applyPage(filterResults, state),
       }
     }
     case 'SET_RANGE_FIELD': {
@@ -99,16 +110,42 @@ export const reducer = (state, action) => {
 
       const page = needsPageReset && !state.firstLoad ? { page: 1 } : {}
 
-      return {
+      const newState = {
         ...state,
         [action.payload.field]: action.payload.value,
         ...page,
+      }
+
+      const filterResults = applyFilters(newState)
+
+      return {
+        ...newState,
+        filterResults,
+        results: applyPage(filterResults, state),
+      }
+    }
+    case 'SET_COMPANY': {
+      console.log('setcompany', action.payload)
+
+      const newState = {
+        ...state,
+        company: action.payload,
+        page: 1,
+      }
+
+      const filterResults = applyFilters(newState)
+
+      return {
+        ...newState,
+        filterResults,
+        results: applyPage(filterResults, state),
       }
     }
     case 'SET_PAGE': {
       return {
         ...state,
         page: action.payload,
+        results: applyPage(state.filterResults, state),
       }
     }
   }

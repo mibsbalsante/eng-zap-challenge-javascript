@@ -54,7 +54,7 @@ const Home = ({ location }) => {
       search: params.toString(),
     })
     dispatch({ type: 'FIRST_LOAD' })
-  }, [state.bedrooms, state.bathrooms, state.parking, state.purpose, state.page])
+  }, [state.bedrooms, state.bathrooms, state.parkingSpaces, state.purpose, state.page])
 
   useEffect(() => {
     const paramsRange = [
