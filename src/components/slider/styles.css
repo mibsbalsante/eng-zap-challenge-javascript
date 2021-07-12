@@ -1,6 +1,4 @@
 .slider {
-  position: relative;
-
   .slide {
     position: relative;
     width: 100%;
@@ -46,6 +44,10 @@
 
   /* remove lib padding outside slides */
   :global {
+    .rec-carousel {
+      position: relative;
+    }
+
     .rec-slider-container {
       margin: 0;
     }
