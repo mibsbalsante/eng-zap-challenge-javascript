@@ -8,9 +8,8 @@
   /* Main colors */
   --color-vivareal: #1190cd;
   --color-zap: #008295;
-  --color-primary: #4fbfa5;
+  --color-primary: var(--color-vivareal);
   --color-secondary: #0a5a80;
-  --color-navbar: var(--color-vivareal);
   --color-text: #1e272e;
 
   /* Helper colors */

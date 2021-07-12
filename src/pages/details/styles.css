@@ -101,7 +101,7 @@
   left: 50%;
   width: 100px;
   height: 100px;
-  background-color: var(--color-navbar);
+  background-color: var(--color-primary);
   border-radius: 100%;
   user-select: none;
   transform: translate(-50%, -50%);

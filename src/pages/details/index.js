@@ -73,7 +73,7 @@ const Details = ({ match }) => {
             )}
 
             {pricingInfos.monthlyCondoFee > 0 && pricingInfos.yearlyIptu > 0 && (
-              <i className={classNames('fas fa-circle', styles.taxesDot)}></i>
+              <i className={classNames('fas fa-circle', styles.taxesDot)} />
             )}
 
             {pricingInfos.yearlyIptu > 0 && (

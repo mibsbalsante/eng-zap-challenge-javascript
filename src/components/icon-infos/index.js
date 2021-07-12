@@ -6,7 +6,7 @@ import styles from './styles.css'
 
 const Info = ({ icon, text }) => (
   <div>
-    <i className={classNames('fas fa-lg', icon, styles.icon)}></i>
+    <i className={classNames('fas fa-lg', icon, styles.icon)} />
     <p className={styles.text}>{text}</p>
   </div>
 )

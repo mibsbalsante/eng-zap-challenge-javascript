@@ -1,5 +1,5 @@
 .navbar {
-  background-color: var(--color-navbar);
+  background-color: var(--color-primary);
   box-shadow: var(--boxshadow);
 }
 
