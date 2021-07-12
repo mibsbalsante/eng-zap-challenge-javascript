@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import GoogleMapReact from 'google-map-react'
 
 import { useContext } from '@context/apartments'
+import Container from '@comp/container'
 import IconInfos from '@comp/icon-infos'
 import Slider from '@comp/slider'
 import formatCurrency from '@util/format-currency'
 import getAddressFromCoords from '@util/get-address-from-coords'
 
 import styles from './styles.css'
+
+const business = {
+  RENTAL: 'para Alugar',
+  SALE: 'à Venda',
+}
 
 const Details = ({ match }) => {
   const pageID = match.params.id
@@ -26,60 +33,79 @@ const Details = ({ match }) => {
     <div className={styles.pageDetails}>
       <Slider images={images} height={600} type='full' />
 
-      <p className={styles.address}>
-        {geoLocation.precision === 'NO_GEOCODE' || !city ? (
-          <>São Paulo</>
-        ) : (
-          <>
-            {neighborhood}, {city}
-          </>
-        )}
-      </p>
+      <Container>
+        <h2 className={styles.heading}>
+          Apartamento {business[pricingInfos.businessType]} com {bedrooms} quartos, {usableAreas}m²
+        </h2>
 
-      <p className={styles.price}>
-        {pricingInfos.businessType === 'SALE' ? (
-          <span>{formatCurrency(pricingInfos.price)}</span>
-        ) : (
-          <>
-            <span>{formatCurrency(pricingInfos.rentalTotalPrice)}</span>
-            <span className={styles.rent}>{'/mês'}</span>
-          </>
-        )}
-      </p>
+        <p className={styles.address}>
+          {geoLocation.precision === 'NO_GEOCODE' || !city ? (
+            <>São Paulo</>
+          ) : (
+            <>
+              {neighborhood}, {city}
+            </>
+          )}
+        </p>
 
-      <IconInfos
-        bathrooms={bathrooms}
-        bedrooms={bedrooms}
-        parkingSpaces={parkingSpaces}
-        usableAreas={usableAreas}
-      />
-
-      <div>
-        {pricingInfos.monthlyCondoFee > 0 && (
-          <>
-            <p className={styles.condo}>
-              Condomínio{' '}
-              <span className={styles.condoFee}>
-                {formatCurrency(pricingInfos.monthlyCondoFee)}
-              </span>
-            </p>
-
-            <i className='fas fa-circle'></i>
-          </>
-        )}
-
-        {pricingInfos.yearlyIptu > 0 && (
-          <p className={styles.condo}>
-            IPTU <span className={styles.condoFee}>{formatCurrency(pricingInfos.yearlyIptu)}</span>
+        <div className={styles.details}>
+          <p className={styles.price}>
+            {pricingInfos.businessType === 'SALE' ? (
+              <span>{formatCurrency(pricingInfos.price)}</span>
+            ) : (
+              <>
+                <span>{formatCurrency(pricingInfos.rentalTotalPrice)}</span>
+                <span className={styles.rent}>{'/mês'}</span>
+              </>
+            )}
           </p>
-        )}
-      </div>
+
+          <div className={styles.taxes}>
+            {pricingInfos.monthlyCondoFee > 0 && (
+              <>
+                <p className={styles.tax}>
+                  Condomínio{' '}
+                  <span className={styles.taxValue}>
+                    {formatCurrency(pricingInfos.monthlyCondoFee)}
+                  </span>
+                </p>
+              </>
+            )}
+
+            {pricingInfos.monthlyCondoFee > 0 && pricingInfos.yearlyIptu > 0 && (
+              <i className={classNames('fas fa-circle', styles.taxesDot)}></i>
+            )}
+
+            {pricingInfos.yearlyIptu > 0 && (
+              <p className={styles.tax}>
+                IPTU{' '}
+                <span className={styles.taxValue}>{formatCurrency(pricingInfos.yearlyIptu)}</span>
+              </p>
+            )}
+          </div>
+
+          <IconInfos
+            big
+            bathrooms={bathrooms}
+            bedrooms={bedrooms}
+            parkingSpaces={parkingSpaces}
+            usableAreas={usableAreas}
+            className={styles.infos}
+          />
+        </div>
+      </Container>
 
       {geoLocation && (
         <section>
-          {street && <p>{street}</p>}
+          {street && (
+            <Container>
+              <h3 className={styles.headingH3}>Localização</h3>
 
-          <div style={{ height: '480px', width: '100%' }}>
+              <p className={styles.street}>{street}</p>
+            </Container>
+          )}
+
+          <div className={styles.map}>
             <GoogleMapReact
               bootstrapURLKeys={{
                 key: process.env.MAPS_API_KEY,

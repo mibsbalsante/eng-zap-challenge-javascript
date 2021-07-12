@@ -1,3 +1,83 @@
+.heading {
+  &,
+  &H3 {
+    font-size: var(--fontsize-heading);
+    font-weight: 600;
+    margin: 48px 0 8px;
+  }
+
+  &H3 {
+    font-size: 28px;
+  }
+}
+
+.address {
+  color: var(--color-grey);
+  font-size: var(--fontsize-sm);
+  font-weight: 600;
+  margin: 0 0 var(--space-text);
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+
+  @media (--media-sm) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.price {
+  font-size: 48px;
+  margin: 0;
+}
+
+.rent {
+  color: var(--color-grey);
+  font-size: var(--fontsize-lg);
+}
+
+.taxes {
+  display: flex;
+  align-items: center;
+
+  &Dot {
+    font-size: 8px;
+    margin: 0 16px;
+  }
+}
+
+.tax {
+  margin: 0;
+
+  &Value {
+    font-weight: 600;
+  }
+}
+
+.infos {
+  font-size: var(--fontsize-sm);
+  grid-column: 2;
+  grid-row: 1/2;
+  margin: 4px 0 0 auto;
+  align-items: center;
+  min-width: 280px;
+
+  @media (--media-sm) {
+    margin: var(--space-text) 0 0;
+  }
+
+  @media (--media-xs) {
+    justify-content: space-evenly;
+    max-width: 100%;
+  }
+}
+
+.street {
+  margin: 16px 0 var(--space-text);
+}
+
 .marker {
   position: absolute;
   top: 50%;
@@ -10,4 +90,9 @@
   transform: translate(-50%, -50%);
   cursor: default;
   opacity: 0.4;
+}
+
+.map {
+  height: 480px;
+  width: 100%;
 }

@@ -25,6 +25,7 @@
   --fontsize-sm: 14px;
   --fontsize-xs: 12px;
   --fontsize-lg: 20px;
+  --fontsize-heading: 32px;
 
   /* Sizes */
   --size-navbar: 64px;
@@ -35,6 +36,7 @@
   /* Spacing */
   --space-container: 24px;
   --space-container-sm: 12px;
+  --space-text: 32px;
 
   /* Transitions */
   --transition-partial: 0.3s ease-in-out;
