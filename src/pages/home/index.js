@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { useContext } from '@context/apartments'
 import Container from '@comp/container'
 import Feed from '@comp/feed'
 import Filters from '@comp/filters'
+import NotFound from '@comp/not-found'
 import Pagination from '@comp/pagination'
 
 import styles from './styles.css'
@@ -12,8 +13,17 @@ import styles from './styles.css'
 const Home = ({ location }) => {
   const { state, dispatch } = useContext()
 
-  // TODO: move all searchparams logic to a hoc
   useEffect(() => {
+    if (state.results.length > 0) {
+      setTimeout(() => dispatch({ type: 'SET_LOADING', payload: false }), 400)
+    }
+  }, [state.results])
+
+  // TODO: move all searchparams logic to a hoc
+
+  useEffect(() => {
+    dispatch({ type: 'SET_LOADING', payload: true })
+
     const query = new URLSearchParams(location.search)
     const params = Object.fromEntries(query.entries())
     const parseToNumber = val => Number(val) || 0
@@ -55,9 +65,17 @@ const Home = ({ location }) => {
             <span className={state.company}>{state.companies[state.company]}</span>
           </p>
         )}
-        <Pagination className={styles.pageHomePaginationTop} />
-        <Feed className={styles.pageHomeFeed} />
-        <Pagination className={styles.pageHomePagination} />
+        {state.isLoading ? (
+          <div>Loading</div>
+        ) : state.results.length > 0 ? (
+          <>
+            <Pagination className={styles.pageHomePaginationTop} />
+            <Feed className={styles.pageHomeFeed} />
+            <Pagination className={styles.pageHomePagination} />
+          </>
+        ) : (
+          <NotFound />
+        )}
       </div>
     </Container>
   )

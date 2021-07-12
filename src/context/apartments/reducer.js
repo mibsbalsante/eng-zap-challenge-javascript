@@ -21,11 +21,12 @@ export const initialState = {
   filterResults: [],
   results: [],
   knownFilters: ['bedrooms', 'bathrooms', 'parkingSpaces', 'purpose', 'page'],
-  // homepage first load (get query params from url)
+  // homepage list title
   companies: {
     zap: 'Zap Imóveis',
     vivareal: 'Viva Real',
   },
+  isLoading: true,
 }
 
 export const reducer = (state, action) => {
@@ -136,6 +137,7 @@ export const reducer = (state, action) => {
         ...state,
         filterResults,
         results: applyPage(filterResults, state.page, state),
+        isLoading: filterResults.length === 0,
       }
     }
     case 'SET_PAGE': {
@@ -143,6 +145,12 @@ export const reducer = (state, action) => {
         ...state,
         page: action.payload,
         results: applyPage(state.filterResults, action.payload, state),
+      }
+    }
+    case 'SET_LOADING': {
+      return {
+        ...state,
+        isLoading: action.payload,
       }
     }
   }
