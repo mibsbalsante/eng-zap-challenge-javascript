@@ -31,4 +31,23 @@
       display: flex;
     }
   }
+
+  &Company {
+    font-weight: 600;
+    margin: 0 0 var(--space-text);
+
+    @media (--media-sm) {
+      margin: 16px 0 var(--space-container);
+    }
+
+    :global {
+      .vivareal {
+        color: var(--color-vivareal);
+      }
+
+      .zap {
+        color: var(--color-zap);
+      }
+    }
+  }
 }

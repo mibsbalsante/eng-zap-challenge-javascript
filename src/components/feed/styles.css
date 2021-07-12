@@ -6,8 +6,4 @@
   @media (--media-sm) {
     padding: 24px 0;
   }
-
-  @media (--media-xs) {
-    padding: 12px 0;
-  }
 }
