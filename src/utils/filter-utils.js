@@ -25,7 +25,7 @@ export const applyFilters = ({
   const filterResults = data.filter(apartment => {
     const isSameBusinessType = apartment.pricingInfos.businessType === purpose
 
-    if (!isSameBusinessType) return false
+    if (!isSameBusinessType && purpose) return false
 
     const isBelowFilters = ['bedrooms', 'bathrooms', 'parkingSpaces'].find(
       filter => apartment[filter] < (filters[filter] || 0)
