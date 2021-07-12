@@ -9,12 +9,13 @@ import PaginationLink from './link'
 import styles from './styles.css'
 
 const Pagination = ({ className }) => {
-  let location = useLocation()
-  let query = location.search
+  const location = useLocation()
 
   const getPage = ind => {
-    if (query) return query.replace(/page=\d*/, `page=${ind}`)
-    return `?page=${ind}`
+    const params = new URLSearchParams(location.search)
+    params.set('page', ind)
+
+    return `?${params.toString()}`
   }
 
   return (
