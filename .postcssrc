@@ -5,7 +5,9 @@
       {
         "browsers": "last 2 versions",
         "features": {
-          "color-mod-function": { "unresolved": "ignore" }
+          "color-mod-function": { "unresolved": "ignore" },
+          "custom-media-queries": true,
+          "media-query-ranges": true
         },
         "importFrom": [
           "./src/config/variables.css"

@@ -1,16 +1,34 @@
 .pageHome {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 280px 1fr;
+  grid-column-gap: var(--space-container);
+  padding: 32px 0;
+
+  @media (--media-sm) {
+    grid-template-columns: 1fr;
+    padding: 24px 0;
+  }
 
   &Filters {
     grid-column: 1/2;
+    grid-row: 1/4;
   }
 
-  &Feed {
-    grid-column: 2/3;
-  }
-
+  &Feed,
   &Pagination {
     grid-column: 2/3;
+
+    @media (--media-sm) {
+      grid-column: 1;
+    }
+  }
+
+  &PaginationTop {
+    display: none;
+
+    @media (--media-sm) {
+      display: flex;
+    }
   }
 }
