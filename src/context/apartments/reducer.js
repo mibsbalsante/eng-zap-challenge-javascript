@@ -22,7 +22,6 @@ export const initialState = {
   results: [],
   knownFilters: ['bedrooms', 'bathrooms', 'parkingSpaces', 'purpose', 'page'],
   // homepage first load (get query params from url)
-  firstLoad: true,
   companies: {
     zap: 'Zap Imóveis',
     vivareal: 'Viva Real',
@@ -36,7 +35,6 @@ export const reducer = (state, action) => {
     case 'FIRST_LOAD': {
       return {
         ...state,
-        firstLoad: false,
       }
     }
     case 'SET_APARTMENTS': {
@@ -64,42 +62,44 @@ export const reducer = (state, action) => {
     case 'SET_FILTERS': {
       // replace the filter even if the value doesnt exist ("all" selection)
       const filters = state.knownFilters.reduce((all, key) => {
-        if (key in action.payload) {
-          let value = action.payload[key]
+        let value = action.payload[key] || ''
 
-          // '' values are falsy and parse to 0, don't parse falsy values
-          if (value && !Number.isNaN(Number(value))) value = Number(value)
+        // '' values are falsy and parse to 0, don't parse falsy values
+        if (value && !Number.isNaN(Number(value))) value = Number(value)
 
-          all = { ...all, ...{ [key]: value || '' } }
-        }
+        all = { ...all, ...{ [key]: value } }
+
+        return all
+      }, {})
+
+      // objects to compare to see if page needs to go back to 1
+      const filtersWithoutPage = state.knownFilters.reduce((all, key) => {
+        if (key !== 'page') all = { ...all, ...{ [key]: filters[key] || '' } }
 
         return all
       }, {})
 
       const oldFilters = state.knownFilters.reduce((all, key) => {
-        if (state[key]) all = { ...all, ...{ [key]: state[key] } }
+        if (key !== 'page') all = { ...all, ...{ [key]: state[key] || '' } }
 
         return all
       }, {})
 
       const needsPageReset =
-        Object.entries(filters).toString() !== Object.entries(oldFilters).toString()
+        Object.entries(filtersWithoutPage).toString() !== Object.entries(oldFilters).toString()
 
-      const page = needsPageReset && !state.firstLoad ? { page: 1 } : {}
+      // reset if lateral filters are different or page field is empty
+      const page = needsPageReset || !filters.page ? { page: 1 } : {}
 
       const newState = {
         ...state,
         ...filters,
         ...page,
-        firstLoad: false,
       }
-
-      const filterResults = applyFilters(newState)
 
       return {
         ...newState,
-        filterResults,
-        results: applyPage(filterResults, state),
+        results: applyPage(state.filterResults, newState.page, newState),
       }
     }
     case 'SET_RANGE_FIELD': {
@@ -108,7 +108,7 @@ export const reducer = (state, action) => {
         Object.entries(state[action.payload.field]).toString() !==
         Object.entries(action.payload.value).toString()
 
-      const page = needsPageReset && !state.firstLoad ? { page: 1 } : {}
+      const page = needsPageReset ? { page: 1 } : {}
 
       const newState = {
         ...state,
@@ -116,36 +116,33 @@ export const reducer = (state, action) => {
         ...page,
       }
 
-      const filterResults = applyFilters(newState)
-
       return {
         ...newState,
-        filterResults,
-        results: applyPage(filterResults, state),
+        results: applyPage(state.filterResults, newState.page, newState),
       }
     }
     case 'SET_COMPANY': {
-      console.log('setcompany', action.payload)
-
-      const newState = {
+      return {
         ...state,
         company: action.payload,
         page: 1,
+        results: applyPage(state.filterResults, 1, state),
       }
-
-      const filterResults = applyFilters(newState)
+    }
+    case 'SET_FILTERED_RESULTS': {
+      const filterResults = applyFilters(state)
 
       return {
-        ...newState,
+        ...state,
         filterResults,
-        results: applyPage(filterResults, state),
+        results: applyPage(filterResults, state.page, state),
       }
     }
     case 'SET_PAGE': {
       return {
         ...state,
         page: action.payload,
-        results: applyPage(state.filterResults, state),
+        results: applyPage(state.filterResults, action.payload, state),
       }
     }
   }
