@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useHistory } from 'react-router-dom'
 
 import { useContext } from '@context/apartments'
 import Container from '@comp/container'
@@ -11,7 +10,6 @@ import Pagination from '@comp/pagination'
 import styles from './styles.css'
 
 const Home = ({ location }) => {
-  const history = useHistory()
   const [company, setCompany] = useState(null)
 
   const { state, dispatch } = useContext()
@@ -38,47 +36,8 @@ const Home = ({ location }) => {
       type: 'SET_RANGE_FIELD',
       payload: rangeParams.squareMetersRange,
     })
-  }, [])
-
-  useEffect(() => {
-    // prevents filter reset at first page load, changing search params only after it
-    if (state.firstLoad) return
-
-    const params = new URLSearchParams(location.search)
-    state.knownFilters.map(key => {
-      params.set(key, state[key])
-    })
-
-    history.push({
-      pathname: location.pathname,
-      search: params.toString(),
-    })
-    dispatch({ type: 'FIRST_LOAD' })
-  }, [state.bedrooms, state.bathrooms, state.parkingSpaces, state.purpose, state.page])
-
-  useEffect(() => {
-    const paramsRange = [
-      {
-        param: 'priceMin',
-        value: state.priceRange.min,
-      },
-      { param: 'priceMax', value: state.priceRange.max },
-      { param: 'areasMin', value: state.squareMetersRange.min },
-      { param: 'areasMax', value: state.squareMetersRange.max },
-    ]
-
-    const paramsToURL = paramsRange.filter(({ value }) => !!value)
-
-    const params = new URLSearchParams(location.search)
-    paramsToURL.map(({ param, value }) => {
-      params.set(param, value)
-    })
-
-    history.push({
-      pathname: location.pathname,
-      search: params.toString(),
-    })
-  }, [state.priceRange, state.squareMetersRange])
+    dispatch({ type: 'SET_FILTERED_RESULTS' })
+  }, [location.search, state.apartments])
 
   useEffect(() => {
     if (location.pathname !== '/') setCompany(location.pathname.slice(1))
