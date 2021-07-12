@@ -8,6 +8,11 @@ import formatCurrency from '@util/format-currency'
 
 import styles from './styles.css'
 
+const business = {
+  RENTAL: 'Aluguel',
+  SALE: 'Venda',
+}
+
 const Card = ({
   id,
   address,
@@ -19,6 +24,7 @@ const Card = ({
   pricingInfos,
 }) => (
   <article className={styles.card}>
+    <span className={styles.businessType}>{business[pricingInfos.businessType]}</span>
     <Slider images={images} height={240} className={styles.slider} />
 
     <Link to={`/imovel/${id}`} className={styles.content}>

@@ -1,10 +1,24 @@
 .card {
   display: flex;
+  position: relative;
   box-shadow: var(--boxshadow);
 
   @media (--media-xs) {
     flex-wrap: wrap;
   }
+}
+
+.businessType {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  padding: 6px 12px;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-size: var(--fontsize-xs);
+  font-weight: 600;
+  border-radius: 100px;
 }
 
 .slider {
