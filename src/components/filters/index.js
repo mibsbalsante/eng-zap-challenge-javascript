@@ -11,7 +11,7 @@ import styles from './styles.css'
 
 const Filters = ({ className }) => (
   <ApartmentsConsumer>
-    {({ state: { bedrooms, bathrooms, parking, purpose } }) => (
+    {({ state: { bedrooms, bathrooms, parkingSpaces, purpose } }) => (
       <aside className={classNames(styles.filters, className)}>
         <div className={styles.mainFilters}>
           <div>
@@ -20,8 +20,8 @@ const Filters = ({ className }) => (
               current={purpose}
               field='purpose'
               options={[
-                { value: 'buy', label: 'Comprar' },
-                { value: 'rent', label: 'Alugar' },
+                { value: 'SALE', label: 'Venda' },
+                { value: 'RENTAL', label: 'Aluguel' },
               ]}
             />
           </div>
@@ -43,8 +43,8 @@ const Filters = ({ className }) => (
           <div>
             <Label>Vagas de garagem</Label>
             <Selection
-              current={parking}
-              field='parking'
+              current={parkingSpaces}
+              field='parkingSpaces'
               options={[1, 2, 3, 4]}
               textComplement='+'
             />

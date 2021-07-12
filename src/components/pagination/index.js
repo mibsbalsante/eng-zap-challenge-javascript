@@ -3,52 +3,64 @@ import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 
-import { ApartmentsConsumer } from '@context/apartments'
+import { useContext } from '@context/apartments'
 
 import PaginationLink from './link'
 import styles from './styles.css'
 
 const Pagination = ({ className }) => {
-  let location = useLocation()
-  let query = location.search
+  const location = useLocation()
+  const { state } = useContext()
+  const { page, pageResults, filterResults } = state
+  const totalPages = Math.ceil(filterResults.length / pageResults)
+  const pages = [...new Array(totalPages)]
 
   const getPage = ind => {
-    if (query) return query.replace(/page=\d*/, `page=${ind}`)
-    return `?page=${ind}`
+    const params = new URLSearchParams(location.search)
+    params.set('page', ind)
+
+    return `?${params.toString()}`
   }
 
   return (
-    <ApartmentsConsumer>
-      {({ state: { page } }) => (
-        <nav className={classNames(styles.pagination, className)}>
+    <nav className={classNames(styles.pagination, className)}>
+      <PaginationLink
+        page={page - 1}
+        className={styles.arrows}
+        visible={page > 1}
+        to={getPage(page - 1)}
+      >
+        <i className='fas fa-angle-left fa-lg' />
+      </PaginationLink>
+      {pages.map((_, ind) => {
+        const linkPage = ind + 1
+        return (
           <PaginationLink
-            page={page - 1}
-            className={styles.arrows}
-            disabled={page <= 1}
-            to={getPage(page - 1)}
+            key={linkPage}
+            page={linkPage}
+            currentPage={page}
+            to={getPage(linkPage)}
+            visible={
+              (page === 1 && ind <= 2) || // first 3 pages
+              (totalPages - ind <= 3 && totalPages - page < 3) || // last 3 pages
+              ind + 1 === page || // next page
+              ind - 1 === page || // last page
+              ind === page // current page
+            }
           >
-            <i className='fas fa-angle-left fa-lg' />
+            {linkPage}
           </PaginationLink>
-          <PaginationLink page={1} currentPage={page} to={getPage(1)}>
-            1
-          </PaginationLink>
-          <PaginationLink page={2} currentPage={page} to={getPage(2)}>
-            2
-          </PaginationLink>
-          <PaginationLink page={3} currentPage={page} to={getPage(3)}>
-            3
-          </PaginationLink>
-          <PaginationLink
-            page={page + 1}
-            className={styles.arrows}
-            disabled={page >= 3}
-            to={getPage(page + 1)}
-          >
-            <i className='fas fa-angle-right fa-lg' />
-          </PaginationLink>
-        </nav>
-      )}
-    </ApartmentsConsumer>
+        )
+      })}
+      <PaginationLink
+        page={page + 1}
+        className={styles.arrows}
+        visible={page < totalPages}
+        to={getPage(page + 1)}
+      >
+        <i className='fas fa-angle-right fa-lg' />
+      </PaginationLink>
+    </nav>
   )
 }
 

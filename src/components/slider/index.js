@@ -11,6 +11,7 @@ const Slider = ({ images, type, height, className }) => {
   const carouselRef = useRef()
   const [isHoverStateActive, setHoverStateActive] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentBreakPoint, setCurrentBreakpoint] = useState(1)
 
   const propsMinimal = {
     pagination: false,
@@ -20,15 +21,17 @@ const Slider = ({ images, type, height, className }) => {
 
   const propsFull = {
     autoPlaySpeed: 5000,
+    enableAutoPlay: !isHoverStateActive && currentBreakPoint > 1,
     enableSwipe: true,
     enableMouseSwipe: true,
     breakPoints: [
-      { width: 1, enableAutoPlay: false, pagination: false },
-      { width: 768, enableAutoPlay: !isHoverStateActive, pagination: true },
+      { width: 1, pagination: false },
+      { width: 768, pagination: true },
     ],
     // eslint-disable-next-line react/display-name
     renderPagination: props => <SliderThumbnails {...props} images={images} />,
     onChange: (_, pageIndex) => setCurrentSlide(pageIndex),
+    onResize: ({ width }) => setCurrentBreakpoint(width),
   }
 
   const props = {

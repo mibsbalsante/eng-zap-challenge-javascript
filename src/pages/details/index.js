@@ -17,6 +17,9 @@ const business = {
   SALE: 'à Venda',
 }
 
+// marker in a new component fixes lib warnings (custom props spreading intro a div)
+const Marker = () => <div className={styles.marker}></div>
+
 const Details = ({ match }) => {
   const pageID = match.params.id
 
@@ -133,11 +136,7 @@ const Details = ({ match }) => {
                 })
               }}
             >
-              <div
-                lat={geoLocation.location.lat}
-                lng={geoLocation.location.lon}
-                className={styles.marker}
-              ></div>
+              <Marker lat={geoLocation.location.lat} lng={geoLocation.location.lon} />
             </GoogleMapReact>
           </div>
         </section>

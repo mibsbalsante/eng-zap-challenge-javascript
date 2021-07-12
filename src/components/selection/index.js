@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { useHistory } from 'react-router-dom'
 
-import { useContext } from '@context/apartments'
 import helperStyles from '@config/helper-classes.css'
 
 import styles from './styles.css'
 
 const Selection = ({ current, field, options, textComplement }) => {
-  const { dispatch } = useContext()
+  const history = useHistory()
 
   const defaultOption = { value: '', label: 'Todos' }
 
@@ -26,8 +26,15 @@ const Selection = ({ current, field, options, textComplement }) => {
             [styles.current]: current === option.value,
           })}
           onClick={() => {
-            if (current !== option.value)
-              dispatch({ type: 'SET_FILTERS', payload: { [field]: option.value } })
+            if (current !== option.value) {
+              const params = new URLSearchParams(location.search)
+              params.set(field, option.value)
+
+              history.push({
+                pathname: location.pathname,
+                search: params.toString(),
+              })
+            }
           }}
           type='button'
         >

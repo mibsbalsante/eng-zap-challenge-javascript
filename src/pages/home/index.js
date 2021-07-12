@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useHistory } from 'react-router-dom'
 
 import { useContext } from '@context/apartments'
 import Container from '@comp/container'
@@ -11,9 +10,6 @@ import Pagination from '@comp/pagination'
 import styles from './styles.css'
 
 const Home = ({ location }) => {
-  const history = useHistory()
-  const [company, setCompany] = useState(null)
-
   const { state, dispatch } = useContext()
 
   // TODO: move all searchparams logic to a hoc
@@ -38,58 +34,27 @@ const Home = ({ location }) => {
       type: 'SET_RANGE_FIELD',
       payload: rangeParams.squareMetersRange,
     })
-  }, [])
+    dispatch({ type: 'SET_FILTERED_RESULTS' })
+  }, [location.search, state.apartments])
 
   useEffect(() => {
-    // prevents filter reset at first page load, changing search params only after it
-    if (state.firstLoad) return
+    if (location.pathname !== '/')
+      dispatch({ type: 'SET_COMPANY', payload: location.pathname.slice(1) })
+    else dispatch({ type: 'SET_COMPANY', payload: '' })
 
-    const params = new URLSearchParams(location.search)
-    state.knownFilters.map(key => {
-      params.set(key, state[key])
-    })
-
-    history.push({
-      pathname: location.pathname,
-      search: params.toString(),
-    })
-    dispatch({ type: 'FIRST_LOAD' })
-  }, [state.bedrooms, state.bathrooms, state.parking, state.purpose, state.page])
-
-  useEffect(() => {
-    const paramsRange = [
-      {
-        param: 'priceMin',
-        value: state.priceRange.min,
-      },
-      { param: 'priceMax', value: state.priceRange.max },
-      { param: 'areasMin', value: state.squareMetersRange.min },
-      { param: 'areasMax', value: state.squareMetersRange.max },
-    ]
-
-    const paramsToURL = paramsRange.filter(({ value }) => !!value)
-
-    const params = new URLSearchParams(location.search)
-    paramsToURL.map(({ param, value }) => {
-      params.set(param, value)
-    })
-
-    history.push({
-      pathname: location.pathname,
-      search: params.toString(),
-    })
-  }, [state.priceRange, state.squareMetersRange])
-
-  useEffect(() => {
-    if (location.pathname !== '/') setCompany(location.pathname.slice(1))
-    else setCompany(null)
+    dispatch({ type: 'SET_FILTERED_RESULTS' })
   }, [location.pathname])
 
   return (
     <Container>
       <div className={styles.pageHome}>
         <Filters className={styles.pageHomeFilters} />
-        {company && <p>Mostrando apenas imóveis de {state.companies[company]}</p>}
+        {state.company && (
+          <p className={styles.pageHomeCompany}>
+            Mostrando apenas imóveis de{' '}
+            <span className={state.company}>{state.companies[state.company]}</span>
+          </p>
+        )}
         <Pagination className={styles.pageHomePaginationTop} />
         <Feed className={styles.pageHomeFeed} />
         <Pagination className={styles.pageHomePagination} />

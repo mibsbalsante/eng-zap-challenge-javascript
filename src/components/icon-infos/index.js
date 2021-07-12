@@ -27,14 +27,18 @@ const IconInfos = ({ className, bedrooms, bathrooms, parkingSpaces, usableAreas 
 
 IconInfos.propTypes = {
   className: PropTypes.string,
-  bathrooms: PropTypes.number.isRequired,
-  bedrooms: PropTypes.number.isRequired,
-  parkingSpaces: PropTypes.number.isRequired,
-  usableAreas: PropTypes.number.isRequired,
+  bathrooms: PropTypes.number,
+  bedrooms: PropTypes.number,
+  parkingSpaces: PropTypes.number,
+  usableAreas: PropTypes.number,
 }
 
 IconInfos.defaultProps = {
   className: undefined,
+  bathrooms: 0,
+  bedrooms: 0,
+  parkingSpaces: 0,
+  usableAreas: 0,
 }
 
 export default IconInfos
