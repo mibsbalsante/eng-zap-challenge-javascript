@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import { useContext } from '@context/apartments'
@@ -10,8 +10,6 @@ import Pagination from '@comp/pagination'
 import styles from './styles.css'
 
 const Home = ({ location }) => {
-  const [company, setCompany] = useState(null)
-
   const { state, dispatch } = useContext()
 
   // TODO: move all searchparams logic to a hoc
@@ -40,15 +38,21 @@ const Home = ({ location }) => {
   }, [location.search, state.apartments])
 
   useEffect(() => {
-    if (location.pathname !== '/') setCompany(location.pathname.slice(1))
-    else setCompany(null)
+    if (location.pathname !== '/')
+      dispatch({ type: 'SET_COMPANY', payload: location.pathname.slice(1) })
+    else dispatch({ type: 'SET_COMPANY', payload: '' })
   }, [location.pathname])
 
   return (
     <Container>
       <div className={styles.pageHome}>
         <Filters className={styles.pageHomeFilters} />
-        {company && <p>Mostrando apenas imóveis de {state.companies[company]}</p>}
+        {state.company && (
+          <p className={styles.pageHomeCompany}>
+            Mostrando apenas imóveis de{' '}
+            <span className={state.company}>{state.companies[state.company]}</span>
+          </p>
+        )}
         <Pagination className={styles.pageHomePaginationTop} />
         <Feed className={styles.pageHomeFeed} />
         <Pagination className={styles.pageHomePagination} />
