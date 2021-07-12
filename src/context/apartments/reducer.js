@@ -1,3 +1,5 @@
+import filterByCompany from '@util/filter-by-company'
+
 export const initialState = {
   company: '',
   // filters
@@ -12,6 +14,8 @@ export const initialState = {
   pageResults: 20,
   // .json results
   apartments: [],
+  apartmentsVivaReal: [],
+  apartmentsZap: [],
   // current filter results
   results: [],
   knownFilters: ['bedrooms', 'bathrooms', 'parking', 'purpose', 'page'],
@@ -35,11 +39,23 @@ export const reducer = (state, action) => {
     }
     case 'SET_APARTMENTS': {
       const apartments = action.payload
+      // remove apartments with invalid geolocation
+      const validApartments = apartments.filter(({ address }) => {
+        const {
+          geoLocation: { location },
+        } = address
+
+        return location.lon && location.lat
+      })
+
+      const listByCompany = filterByCompany(validApartments)
 
       return {
         ...state,
-        apartments: apartments,
-        results: (apartments || []).slice(0, state.pageResults),
+        apartments: validApartments,
+        apartmentsVivaReal: listByCompany.vivaReal,
+        apartmentsZap: listByCompany.zap,
+        results: (validApartments || []).slice(0, state.pageResults),
       }
     }
     case 'SET_FILTERS': {
