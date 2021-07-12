@@ -41,6 +41,8 @@ const Home = ({ location }) => {
     if (location.pathname !== '/')
       dispatch({ type: 'SET_COMPANY', payload: location.pathname.slice(1) })
     else dispatch({ type: 'SET_COMPANY', payload: '' })
+
+    dispatch({ type: 'SET_FILTERED_RESULTS' })
   }, [location.pathname])
 
   return (
