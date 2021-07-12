@@ -92,6 +92,15 @@ const Details = ({ match }) => {
             usableAreas={usableAreas}
             className={styles.infos}
           />
+
+          <a
+            target='_blank'
+            rel='noopener noreferrer'
+            href={`https://api.whatsapp.com/send?phone=55`}
+            className={styles.phone}
+          >
+            Contatar o anunciante
+          </a>
         </div>
       </Container>
 
