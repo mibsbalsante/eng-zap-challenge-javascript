@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import Input from './input'
 import styles from './styles.css'
 
 const InputRange = props => {
+  const history = useHistory()
   const location = useLocation()
 
   const [fieldValues, setFieldValues] = useState({ min: 0, max: 0 })
@@ -16,7 +17,8 @@ const InputRange = props => {
     setFieldValues(old => ({ ...old, ...{ [type]: current } }))
 
     const params = new URLSearchParams(location.search)
-    params.set(props.field, fieldValues)
+    params.set(`${props.param}Min`, fieldValues.min)
+    params.set(`${props.param}Max`, fieldValues.max)
 
     history.push({
       pathname: location.pathname,
