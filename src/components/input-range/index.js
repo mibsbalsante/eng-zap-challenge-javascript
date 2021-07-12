@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 
-import { useContext } from '@context/apartments'
-
 import Input from './input'
 import styles from './styles.css'
 
 const InputRange = props => {
   const location = useLocation()
-  const { dispatch } = useContext()
 
   const [fieldValues, setFieldValues] = useState({ min: 0, max: 0 })
 
@@ -17,7 +14,14 @@ const InputRange = props => {
     let current = Number((value || '').replace(/\./g, ''))
 
     setFieldValues(old => ({ ...old, ...{ [type]: current } }))
-    dispatch({ type: 'SET_RANGE_FIELD', payload: { field: props.field, value: fieldValues } })
+
+    const params = new URLSearchParams(location.search)
+    params.set(props.field, fieldValues)
+
+    history.push({
+      pathname: location.pathname,
+      search: params.toString(),
+    })
   }
 
   useEffect(() => {
