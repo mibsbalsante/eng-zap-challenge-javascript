@@ -23,13 +23,16 @@ export const applyFilters = ({
   if (company === 'zap') data = apartmentsZap
 
   const filterResults = data.filter(apartment => {
-    const isSameBusinessType = apartment.pricingInfos.businessType === purpose
+    const isSameBusinessType = apartment.pricingInfos.businessType === purpose || !purpose
 
-    if (!isSameBusinessType && purpose) return false
+    // if purpose field's empty, get all business types
+    if (!isSameBusinessType) return false
 
-    const isBelowFilters = ['bedrooms', 'bathrooms', 'parkingSpaces'].find(
-      filter => apartment[filter] < (filters[filter] || 0)
-    )
+    const isBelowFilters = ['bedrooms', 'bathrooms', 'parkingSpaces'].find(filter => {
+      // same with selection filters
+      if (!filters[filter]) return false
+      return apartment[filter] < filters[filter]
+    })
 
     const isCurrencyBetweenFilters =
       isInRange(apartment.pricingInfos.price, priceRange) ||
