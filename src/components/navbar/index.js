@@ -11,7 +11,7 @@ import styles from './styles.css'
 
 const Navbar = () => (
   <header className={styles.navbar}>
-    <Container>
+    <Container row>
       <Link
         to='/'
         alt='Mostrar todos os resultados'
