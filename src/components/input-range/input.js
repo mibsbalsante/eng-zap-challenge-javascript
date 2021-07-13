@@ -7,7 +7,7 @@ import helperStyles from '@config/helper-classes.css'
 
 import styles from './styles.css'
 
-const Input = ({ field, format, placeholder, type, value, onChange }) => (
+const Input = ({ field, format, placeholder, type, value, onBlur, onChange }) => (
   <div className={styles.inputContainer}>
     <CurrencyInput
       id={`${field}-${type}`}
@@ -20,6 +20,7 @@ const Input = ({ field, format, placeholder, type, value, onChange }) => (
       decimalSeparator=','
       groupSeparator='.'
       value={value ? value : ''}
+      onBlur={({ target }) => onBlur({ value: target.value, type })}
       onValueChange={val => onChange({ value: val, type })}
       className={classNames(helperStyles.formControl, styles.input, {
         [styles.money]: format === 'money',
@@ -36,6 +37,7 @@ Input.propTypes = {
   field: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  onBlur: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
 }
 
