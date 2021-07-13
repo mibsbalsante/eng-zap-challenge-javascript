@@ -11,19 +11,23 @@ const InputRange = props => {
 
   const [fieldValues, setFieldValues] = useState({ min: 0, max: 0 })
 
-  const handleReplace = ({ value, type }) => {
-    let current = Number((value || '').replace(/\./g, ''))
-
-    setFieldValues(old => ({ ...old, ...{ [type]: current } }))
+  const handleFilter = ({ value, type }) => {
+    let current = Number((value || '').replace(/\D/g, ''))
+    const values = { ...fieldValues, ...{ [type]: current } }
 
     const params = new URLSearchParams(location.search)
-    params.set(`${props.param}Min`, fieldValues.min)
-    params.set(`${props.param}Max`, fieldValues.max)
+    params.set(`${props.param}Min`, values.min)
+    params.set(`${props.param}Max`, values.max)
 
     history.push({
       pathname: location.pathname,
       search: params.toString(),
     })
+  }
+
+  const handleReplace = ({ value, type }) => {
+    let current = Number((value || '').replace(/\D/g, ''))
+    setFieldValues(old => ({ ...old, ...{ [type]: current } }))
   }
 
   useEffect(() => {
@@ -46,14 +50,15 @@ const InputRange = props => {
         type='min'
         placeholder='Mínimo'
         value={fieldValues.min}
+        onBlur={handleFilter}
         onChange={handleReplace}
       />
-      {/* TODO: set max input min value to min input value */}
       <Input
         {...props}
         type='max'
         placeholder='Máximo'
         value={fieldValues.max}
+        onBlur={handleFilter}
         onChange={handleReplace}
       />
     </div>

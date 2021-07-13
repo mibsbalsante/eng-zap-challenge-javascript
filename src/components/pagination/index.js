@@ -22,7 +22,7 @@ const Pagination = ({ className }) => {
     return `?${params.toString()}`
   }
 
-  return (
+  return filterResults.length > 0 ? (
     <nav className={classNames(styles.pagination, className)}>
       <PaginationLink
         page={page - 1}
@@ -61,6 +61,8 @@ const Pagination = ({ className }) => {
         <i className='fas fa-angle-right fa-lg' />
       </PaginationLink>
     </nav>
+  ) : (
+    <></>
   )
 }
 

@@ -1,0 +1,75 @@
+.skeleton {
+  height: 240px;
+  width: 100%;
+  box-shadow: var(--boxshadow);
+  display: flex;
+
+  + .skeleton {
+    margin-top: 24px;
+  }
+
+  .image,
+  .top,
+  .title,
+  .bottom {
+    position: relative;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        var(--color-grey),
+        var(--color-text),
+        var(--color-grey)
+      );
+    background-repeat: repeat-x;
+    background-size: 400% 100%;
+    animation: skeleton 2s linear infinite;
+  }
+
+  .image {
+    width: 100%;
+    max-width: 360px;
+
+    @media (--media-lg) {
+      min-width: 45%;
+    }
+
+    @media (--media-xs) {
+      max-width: unset;
+    }
+  }
+
+  .content {
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top {
+    height: 15px;
+    width: 60%;
+  }
+
+  .title {
+    height: 27px;
+    margin: 8px 0 12px;
+    width: 45%;
+  }
+
+  .bottom {
+    height: 38px;
+    margin-top: auto;
+    max-width: 280px;
+    width: 100%;
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: -33% 50%;
+  }
+}

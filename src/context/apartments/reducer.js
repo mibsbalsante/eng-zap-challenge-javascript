@@ -21,22 +21,16 @@ export const initialState = {
   filterResults: [],
   results: [],
   knownFilters: ['bedrooms', 'bathrooms', 'parkingSpaces', 'purpose', 'page'],
-  // homepage first load (get query params from url)
+  // homepage list title
   companies: {
     zap: 'Zap Imóveis',
     vivareal: 'Viva Real',
   },
+  isLoading: true,
 }
 
 export const reducer = (state, action) => {
-  // show first page only
-  // todo: filters/company
   switch (action.type) {
-    case 'FIRST_LOAD': {
-      return {
-        ...state,
-      }
-    }
     case 'SET_APARTMENTS': {
       const apartments = action.payload
       // remove apartments with invalid geolocation
@@ -103,7 +97,6 @@ export const reducer = (state, action) => {
       }
     }
     case 'SET_RANGE_FIELD': {
-      // TODO: duplicate logic, refactor it
       const needsPageReset =
         Object.entries(state[action.payload.field]).toString() !==
         Object.entries(action.payload.value).toString()
@@ -143,6 +136,12 @@ export const reducer = (state, action) => {
         ...state,
         page: action.payload,
         results: applyPage(state.filterResults, action.payload, state),
+      }
+    }
+    case 'SET_LOADING': {
+      return {
+        ...state,
+        isLoading: action.payload,
       }
     }
   }
