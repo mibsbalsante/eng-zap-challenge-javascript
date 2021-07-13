@@ -69,7 +69,7 @@ const Slider = ({ images, type, height, className }) => {
               <a
                 target='_blank'
                 rel='noopener noreferrer'
-                href={currentSlide === ind ? url : '#'}
+                href={currentSlide === ind ? url.replace(/(^\w+:|^)\/\//, '//') : '#'}
                 className={classNames(styles.newTab, { [styles.isVisible]: currentSlide === ind })}
               >
                 <i className='fas fa-camera' /> <span>Expandir</span>

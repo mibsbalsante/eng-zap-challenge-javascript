@@ -12,7 +12,7 @@ const SliderThumbnails = ({ images, pages, activePage, onClick }) => (
         className={classNames(styles.button, { [styles.isActive]: activePage === page })}
         onClick={() => onClick(page)}
       >
-        <img src={images[page]} className={styles.image} />
+        <img src={images[page].replace(/(^\w+:|^)\/\//, '//')} className={styles.image} />
       </button>
     ))}
   </div>
