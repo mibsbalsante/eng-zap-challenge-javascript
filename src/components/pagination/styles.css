@@ -1,0 +1,26 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  appearance: none;
+  text-decoration: none;
+  border-color: var(--color-white);
+  height: 48px;
+  min-width: 48px;
+
+  + .link {
+    margin-left: 16px;
+  }
+
+  &.current {
+    border-color: var(--color-secondary);
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+  }
+}
+
+.arrows {
+  border-color: var(--color-white);
+}

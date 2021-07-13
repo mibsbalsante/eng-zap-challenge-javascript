@@ -1,0 +1,71 @@
+.card {
+  display: flex;
+  position: relative;
+  box-shadow: var(--boxshadow);
+
+  @media (--media-xs) {
+    flex-wrap: wrap;
+  }
+}
+
+.businessType {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  padding: 6px 12px;
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  font-size: var(--fontsize-xs);
+  font-weight: 600;
+  border-radius: 100px;
+}
+
+.slider {
+  min-width: 360px;
+
+  @media (--media-lg) {
+    min-width: 45%;
+    max-width: 360px;
+  }
+
+  @media (--media-xs) {
+    width: 100%;
+    max-width: unset;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 16px;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.address {
+  margin: 0;
+  color: var(--color-grey);
+  font-weight: 600;
+  font-size: var(--fontsize-xs);
+}
+
+.price {
+  font-size: var(--fontsize-lg);
+  margin: 8px 0 12px;
+}
+
+.rent {
+  color: var(--color-grey);
+  font-size: var(--fontsize-sm);
+}
+
+.condo {
+  font-size: var(--fontsize-xs);
+  margin: 0 0 12px;
+
+  &Fee {
+    font-weight: 600;
+  }
+}

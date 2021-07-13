@@ -1,0 +1,17 @@
+.infos {
+  display: flex;
+  font-size: var(--fontsize-xs);
+  text-align: center;
+  justify-content: space-between;
+  max-width: 260px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.icon {
+  color: var(--color-zap);
+}
+
+.text {
+  margin: 8px 0 0;
+}

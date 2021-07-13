@@ -1,0 +1,22 @@
+{
+  "vivaReal": {
+    "rental": { "max": 4000 },
+    "price": { "max": 700000 },
+    "condoFeeRentalPricePercentageMax": 0.3,
+    "boundingBoxRentalPriceMax": 1.5
+  },
+  "zap": {
+    "rental": { "min": 3500 },
+    "price": { "min": 600000 },
+    "usableAreasSalePriceMinMeter": 3500,
+    "boundingBoxSalePriceMin": 0.9
+  },
+  "all": {
+    "boundingBox": {
+      "minlon": -46.693419,
+      "minlat": -23.568704,
+      "maxlon": -46.641146,
+      "maxlat": -23.546686
+    }
+  }
+}

@@ -1,0 +1,6 @@
+.label {
+  display: inline-block;
+  font-size: var(--fontsize-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+}
