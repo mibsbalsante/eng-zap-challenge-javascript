@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "https://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/*"
+  from = "/api/*"
   to = "http://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/:splat"
   status = 200
   force = true
