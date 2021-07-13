@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/api"
+  to = "http://grupozap-code-challenge.s3-website-us-east-1.amazonaws.com/sources/source-1.json"
+  status = 200
+  force = true
