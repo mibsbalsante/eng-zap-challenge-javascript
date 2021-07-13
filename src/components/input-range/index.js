@@ -53,7 +53,6 @@ const InputRange = props => {
         onBlur={handleFilter}
         onChange={handleReplace}
       />
-      {/* TODO: set max input min value to min input value */}
       <Input
         {...props}
         type='max'

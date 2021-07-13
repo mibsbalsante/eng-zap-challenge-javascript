@@ -30,14 +30,7 @@ export const initialState = {
 }
 
 export const reducer = (state, action) => {
-  // show first page only
-  // todo: filters/company
   switch (action.type) {
-    case 'FIRST_LOAD': {
-      return {
-        ...state,
-      }
-    }
     case 'SET_APARTMENTS': {
       const apartments = action.payload
       // remove apartments with invalid geolocation
@@ -104,7 +97,6 @@ export const reducer = (state, action) => {
       }
     }
     case 'SET_RANGE_FIELD': {
-      // TODO: duplicate logic, refactor it
       const needsPageReset =
         Object.entries(state[action.payload.field]).toString() !==
         Object.entries(action.payload.value).toString()
