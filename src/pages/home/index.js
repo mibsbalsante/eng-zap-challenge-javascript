@@ -20,6 +20,13 @@ const Home = ({ location }) => {
     }
   }, [state.results])
 
+  useEffect(() => {
+    // fix stuck on loading
+    setTimeout(() => {
+      dispatch({ type: 'SET_LOADING', payload: false })
+    }, 5000)
+  }, [state.isLoading])
+
   // TODO: move all searchparams logic to a hoc
 
   useEffect(() => {
