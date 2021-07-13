@@ -7,11 +7,18 @@ import SliderArrow from './arrow'
 import SliderThumbnails from './thumbnails'
 import styles from './styles.css'
 
-const Slider = ({ images, type, height, className }) => {
+const replaceURL = url =>
+  process.env.NETLIFY_REDIRECT
+    ? url.replace(/(^\w+:|^)\/\//, '//').replace(process.env.NETLIFY_REDIRECT, '/api/')
+    : url
+
+const Slider = ({ images: urls, type, height, className }) => {
   const carouselRef = useRef()
   const [isHoverStateActive, setHoverStateActive] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [currentBreakPoint, setCurrentBreakpoint] = useState(1)
+
+  const images = urls.map(url => replaceURL(url))
 
   const propsMinimal = {
     pagination: false,
