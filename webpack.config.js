@@ -87,7 +87,9 @@ module.exports = (env, { mode }) => {
       filename: 'index__[contenthash].js',
     },
     plugins: [
-      new Dotenv(),
+      new Dotenv({
+        systemvars: true,
+      }),
       new MiniCssExtractPlugin({
         filename: '[name]__[contenthash].css',
         chunkFilename: '[id]__[contenthash].css',
