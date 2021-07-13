@@ -11,6 +11,7 @@
     "dev": "webpack serve --hot --mode=development",
     "dev:open": "webpack serve --open --hot --mode=development",
     "build": "webpack --mode=production",
+    "build:netlify": "node netlify-env.js && webpack --mode=production",
     "start": "serve -s ./dist",
     "lint": "eslint './src/**/*.js' && stylelint './src/**/*.css'",
     "lint:fix": "eslint './**/*.js' --fix && stylelint './src/**/*.css' --fix"
