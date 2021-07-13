@@ -137,7 +137,6 @@ export const reducer = (state, action) => {
         ...state,
         filterResults,
         results: applyPage(filterResults, state.page, state),
-        isLoading: filterResults.length === 0,
       }
     }
     case 'SET_PAGE': {

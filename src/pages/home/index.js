@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import { useContext } from '@context/apartments'
 import Container from '@comp/container'
 import Feed from '@comp/feed'
 import Filters from '@comp/filters'
+import Loading from '@comp/loading'
 import NotFound from '@comp/not-found'
 import Pagination from '@comp/pagination'
 
@@ -15,7 +16,7 @@ const Home = ({ location }) => {
 
   useEffect(() => {
     if (state.results.length > 0) {
-      setTimeout(() => dispatch({ type: 'SET_LOADING', payload: false }), 400)
+      setTimeout(() => dispatch({ type: 'SET_LOADING', payload: false }), 600)
     }
   }, [state.results])
 
@@ -65,8 +66,9 @@ const Home = ({ location }) => {
             <span className={state.company}>{state.companies[state.company]}</span>
           </p>
         )}
+        {state.isLoading}
         {state.isLoading ? (
-          <div>Loading</div>
+          <Loading />
         ) : state.results.length > 0 ? (
           <>
             <Pagination className={styles.pageHomePaginationTop} />
